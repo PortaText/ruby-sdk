@@ -1,10 +1,7 @@
-require 'test/unit'
+require 'test_helper'
 
-class DummyTest < Test::Unit::TestCase
-
+class DummyTest < Minitest::Test
   def test_length
-    s = "Hello, World!"
-    assert_equal(13, s.length)
+    assert true
   end
-
 end
