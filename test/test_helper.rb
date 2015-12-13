@@ -7,5 +7,5 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   Coveralls::SimpleCov::Formatter
 ]
 SimpleCov.start
-require 'portatext-sdk'
+require 'portatext_sdk'
 require 'minitest/autorun'
