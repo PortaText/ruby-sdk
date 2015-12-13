@@ -40,10 +40,8 @@ module PortaText
 
       def create_http(uri)
         http = Net::HTTP.new uri.host, uri.port
-        if uri.scheme == 'https'
-          http.use_ssl = true
-          http.verify_mode = ::OpenSSL::SSL::VERIFY_PEER
-        end
+        http.use_ssl = uri.scheme == 'https'
+        http.verify_mode = ::OpenSSL::SSL::VERIFY_PEER
         http
       end
 

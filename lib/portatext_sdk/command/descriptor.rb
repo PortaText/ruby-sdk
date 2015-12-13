@@ -18,10 +18,6 @@ module PortaText
         @headers = headers
         @body = body
       end
-
-      def to_s
-        "URI: #{@uri}, Method: #{@method}, Headers: #{@headers}, Body: #{body}"
-      end
     end
   end
 end
