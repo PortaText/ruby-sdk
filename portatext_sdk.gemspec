@@ -19,4 +19,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'minitest', '~> 5.8'
   s.add_development_dependency 'rubocop', '~> 0.35'
   s.add_development_dependency 'bundler-audit', '~> 0.4'
+  s.add_development_dependency 'codeclimate-test-reporter', '~> 0.4'
 end
