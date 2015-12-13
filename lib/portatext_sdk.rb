@@ -1,4 +1,4 @@
-require_relative 'portatext_sdk/client/client'
+require_relative 'portatext_sdk/client/base_client'
 require_relative 'portatext_sdk/client/http_client'
 require_relative 'portatext_sdk/command/descriptor'
 require_relative 'portatext_sdk/command/result'

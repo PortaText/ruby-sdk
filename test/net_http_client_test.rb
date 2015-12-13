@@ -76,7 +76,7 @@ module PortaText
         client = PortaText::Client::HttpClient.new
         sleep 0.2
         code, headers, body = client.execute PortaText::Command::Descriptor.new(
-          "http://127.0.0.1:#{port}",
+          "http://127.0.0.1:#{port}/some/endpoint",
           method,
           {
             'header1' => 'value1'
@@ -91,7 +91,7 @@ module PortaText
         }
         assert body == '{"success":true}'
         content = File.readlines recv_file
-        assert "#{method.upcase} / HTTP/1.1" == content[0].chop
+        assert "#{method.upcase} /some/endpoint HTTP/1.1" == content[0].chop
         recv_file.delete
       end
     end

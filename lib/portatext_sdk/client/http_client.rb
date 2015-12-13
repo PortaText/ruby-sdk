@@ -24,7 +24,7 @@ module PortaText
       end
 
       def initialize
-        super
+        super self
       end
 
       private
