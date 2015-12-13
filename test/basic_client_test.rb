@@ -20,7 +20,8 @@ module PortaText
           } &&
           descriptor.body == 'body'
         end
-        client = PortaText::Client::BaseClient.new mock
+        client = PortaText::Client::BaseClient.new
+        client.executor = mock
         client.run "some/endpoint", :post, 'application/json', 'body'
         assert mock.verify
       end

@@ -9,10 +9,10 @@ module PortaText
     # Copyright:: Copyright (c) 2015 PortaText
     # License::   Apache-2.0
     class BaseClient
-      attr_writer :logger
       attr_writer :endpoint
       attr_writer :api_key
       attr_writer :credentials
+      attr_writer :executor
 
       def run(endpoint, method, content_type, body, auth = nil)
         auth ||= auth_method
@@ -21,19 +21,19 @@ module PortaText
         descriptor = PortaText::Command::Descriptor.new(
           uri, method, headers, body
         )
-        ret_code, ret_headers, ret_body = @implementation.execute descriptor
+        ret_code, ret_headers, ret_body = @executor.execute descriptor
         PortaText::Command::Result.new(
           ret_code, ret_headers, JSON.parse(ret_body)
         )
       end
 
-      def initialize(execution_implementation)
+      def initialize
         @logger = ::Logger.new nil
         @endpoint = DEFAULT_ENDPOINT
         @api_key = nil
         @credentials = nil
         @session_token = nil
-        @implementation = execution_implementation
+        @executor = self
       end
 
       private

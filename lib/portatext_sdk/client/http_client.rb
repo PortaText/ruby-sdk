@@ -23,10 +23,6 @@ module PortaText
         end
       end
 
-      def initialize
-        super self
-      end
-
       private
 
       def create_http(uri)
