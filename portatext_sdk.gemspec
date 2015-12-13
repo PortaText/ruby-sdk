@@ -12,11 +12,11 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.homepage    = 'http://rubygems.org/gems/portatext_sdk'
   s.license     = 'Apache-2.0'
-  s.add_development_dependency 'simplecov', '~> 0'
-  s.add_development_dependency 'coveralls', '~> 0'
+  s.add_development_dependency 'simplecov', '~> 0.11'
+  s.add_development_dependency 'coveralls', '~> 0.8'
   s.add_development_dependency 'bundler', '~> 1.10'
   s.add_development_dependency 'rake', '~> 10.0'
-  s.add_development_dependency 'minitest', '~> 0'
-  s.add_development_dependency 'rubocop', '~> 0'
-  s.add_development_dependency 'bundler-audit', '~> 0'
+  s.add_development_dependency 'minitest', '~> 5.8'
+  s.add_development_dependency 'rubocop', '~> 0.35'
+  s.add_development_dependency 'bundler-audit', '~> 0.4'
 end
