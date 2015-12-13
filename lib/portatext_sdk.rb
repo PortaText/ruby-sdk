@@ -2,6 +2,7 @@ require_relative 'portatext_sdk/client/client'
 require_relative 'portatext_sdk/client/http_client'
 require_relative 'portatext_sdk/command/descriptor'
 require_relative 'portatext_sdk/command/result'
+require_relative 'portatext_sdk/exception/request_error'
 
 # The PortaText namespace.
 #
