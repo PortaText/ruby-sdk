@@ -42,7 +42,7 @@ module PortaText
           Process.exit! true
         end
         client = PortaText::Client::HttpClient.new
-        sleep 0.2
+        sleep 0.5
         code, headers, body = client.execute PortaText::Command::Descriptor.new(
           "http://127.0.0.1:#{port}",
           :post,
