@@ -1,5 +1,5 @@
 # ruby-sdk
-[![License](https://poser.pugx.org/portatext/ruby-sdk/license)](https://packagist.org/packages/portatext/ruby-sdk)
+[![License](https://poser.pugx.org/portatext/ruby-sdk/license)](http://img.shields.io/badge/license-APACHE2-blue.svg)
 [![Gem Version](https://badge.fury.io/rb/portatext_sdk.svg)](https://badge.fury.io/rb/portatext_sdk)
 [![Documentation Status](https://readthedocs.org/projects/portatext-ruby-sdk/badge/?version=latest)](http://portatext-ruby-sdk.readthedocs.org/en/latest/?badge=latest)
 
