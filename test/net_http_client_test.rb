@@ -10,8 +10,41 @@ module PortaText
     # Copyright:: Copyright (c) 2015 PortaText
     # License::   Apache-2.0
     class NetHttpClient < Minitest::Test
-      def test_methods
-        port = 54_320
+      def test_request_error
+        uri = "http://127.0.0.1:65534"
+        descriptor = PortaText::Command::Descriptor.new(
+          uri, :post, {"h1" => "v1"}, "body"
+        )
+        client = PortaText::Client::HttpClient.new
+        assert_raises PortaText::Exception::RequestError do
+          client.execute descriptor
+        end
+      end
+
+      def test_get
+        run_method :get
+      end
+
+      def test_post
+        run_method :post
+      end
+
+      def test_put
+        run_method :put
+      end
+
+      def test_delete
+        run_method :delete
+      end
+
+      def test_patch
+        run_method :patch
+      end
+
+      private
+
+      def run_method(method)
+        port = rand(64_511) + 1_024
         recv_file = Tempfile.new "received#{port}"
         Process.fork do
           server = TCPServer.new port
@@ -20,7 +53,7 @@ module PortaText
           client = server.accept
           buffer = ''
           loop do
-            new_buff = client.recv 2048
+            new_buff = client.recv 2_048
             buffer = buffer + new_buff
             break if /a body/ =~ buffer
           end
@@ -41,10 +74,10 @@ module PortaText
           Process.exit! true
         end
         client = PortaText::Client::HttpClient.new
-        sleep 0.5
+        sleep 0.2
         code, headers, body = client.execute PortaText::Command::Descriptor.new(
           "http://127.0.0.1:#{port}",
-          :post,
+          method,
           {
             'header1' => 'value1'
           },
@@ -57,6 +90,8 @@ module PortaText
           'x-header2' => 'value2'
         }
         assert body == '{"success":true}'
+        content = File.readlines recv_file
+        assert "#{method.upcase} / HTTP/1.1" == content[0].chop
         recv_file.delete
       end
     end

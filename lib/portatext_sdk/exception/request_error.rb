@@ -7,10 +7,12 @@ module PortaText
     # License::   Apache-2.0
     class RequestError < ::Exception
       attr_reader :descriptor
+      attr_reader :original
 
-      def initialize(descriptor, message)
+      def initialize(descriptor, message = nil, original = nil)
         super message
         @descriptor = descriptor
+        @original = original
       end
     end
   end

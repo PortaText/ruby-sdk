@@ -16,24 +16,15 @@ module PortaText
         request = create_request uri, descriptor.method, descriptor.body
         begin
           request! descriptor, http, request
-        rescue *@net_http_errors => e
-          raise ::PortaText::Exception::RequestError.new descriptor, e.message
+        rescue => e
+          raise ::PortaText::Exception::RequestError.new(
+            descriptor, e.message, e
+          )
         end
       end
 
-      # rubocop:disable Metrics/MethodLength
       def initialize
         super
-        @net_http_errors = [
-          ::SocketError,
-          ::Timeout::Error,
-          ::Errno::EINVAL,
-          ::Errno::ECONNRESET,
-          ::EOFError,
-          ::Net::HTTPBadResponse,
-          ::Net::HTTPHeaderSyntaxError,
-          ::Net::ProtocolError
-        ]
       end
 
       private
