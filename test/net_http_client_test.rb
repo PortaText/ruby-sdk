@@ -16,7 +16,6 @@ module PortaText
         Process.fork do
           server = TCPServer.new port
           server.setsockopt :SOCKET, :REUSEADDR, 1
-          server.setsockopt :SOCKET, :REUSEPORT, 1
           server.listen 10
           client = server.accept
           buffer = ''
