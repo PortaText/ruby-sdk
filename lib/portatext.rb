@@ -24,6 +24,7 @@ require_relative 'portatext/command/api/templates'
 require_relative 'portatext/command/api/sms'
 require_relative 'portatext/command/api/timezones'
 require_relative 'portatext/command/api/cnam'
+require_relative 'portatext/command/api/recharge'
 
 # The PortaText namespace.
 #
