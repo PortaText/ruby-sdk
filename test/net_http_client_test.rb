@@ -45,7 +45,7 @@ module PortaText
       private
 
       def run_method(method)
-        port = rand(64_511) + 1_024
+        port = 50_000
         recv_file = Tempfile.new "received#{port}"
         accept_file = Dir::Tmpname.make_tmpname "/tmp/accept#{port}", nil
         Process.fork do
