@@ -9,29 +9,24 @@ module PortaText
       # License::   Apache-2.0
       class Me < Base
         def name(first, last)
-          @args[:first_name] = first
-          @args[:last_name] = last
-          self
+          set :first_name, first
+          set :last_name, last
         end
 
         def company(company)
-          @args[:company] = company
-          self
+          set :company, company
         end
 
         def email(email)
-          @args[:email] = email
-          self
+          set :email, email
         end
 
         def callback_url(callback_url)
-          @args[:callback_url] = callback_url
-          self
+          set :callback_url, callback_url
         end
 
         def timezone(timezone)
-          @args[:timezone] = timezone
-          self
+          set :timezone, timezone
         end
 
         def endpoint(_method)

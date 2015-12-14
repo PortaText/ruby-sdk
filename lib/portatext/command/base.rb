@@ -28,6 +28,11 @@ module PortaText
         run :delete
       end
 
+      def set(key, value)
+        @args[key] = value
+        self
+      end
+
       def content_type(_method)
         'application/json'
       end

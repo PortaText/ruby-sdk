@@ -9,8 +9,7 @@ module PortaText
       # License::   Apache-2.0
       class Tariffs < Base
         def for_country(country_iso)
-          @args[:country] = country_iso
-          self
+          set :country, country_iso
         end
 
         def endpoint(_method)

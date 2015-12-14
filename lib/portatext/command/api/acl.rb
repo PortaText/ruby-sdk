@@ -7,35 +7,23 @@ module PortaText
       # Author::    Marcelo Gornstein (mailto:marcelog@portatext.com)
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
-      class Me < Base
-        def name(first, last)
-          @args[:first_name] = first
-          @args[:last_name] = last
-          self
+      class Acl < Base
+        def add(ip, netmask = 32, description = '')
+          key = "#{ip}#{netmask}"
+          set key, {
+            :ip => ip,
+            :netmask => netmask,
+            :description => description
+          }
         end
 
-        def company(company)
-          @args[:company] = company
-          self
-        end
-
-        def email(email)
-          @args[:email] = email
-          self
-        end
-
-        def callback_url(callback_url)
-          @args[:callback_url] = callback_url
-          self
-        end
-
-        def timezone(timezone)
-          @args[:timezone] = timezone
-          self
+        def body(method)
+          return super if method.eql? :get
+          {:acl => @args.values}.to_json
         end
 
         def endpoint(_method)
-          'me'
+          'me/acl'
         end
       end
     end
