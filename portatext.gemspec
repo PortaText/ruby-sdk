@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name        = 'portatext_sdk'
+  s.name        = 'portatext'
   s.version     = '0.0.1'
   s.summary     = 'Official PortaText API ruby client'
   s.description = 'This is the official PortaText API ruby client'
@@ -7,10 +7,10 @@ Gem::Specification.new do |s|
   s.email       = 'hello@portatext.com'
   s.files         = [
     'Gemfile',
-    'lib/portatext_sdk'
+    'lib/portatext'
   ]
   s.require_paths = ['lib']
-  s.homepage    = 'http://rubygems.org/gems/portatext_sdk'
+  s.homepage    = 'http://rubygems.org/gems/portatext'
   s.license     = 'Apache-2.0'
   s.add_development_dependency 'simplecov', '~> 0.11'
   s.add_development_dependency 'coveralls', '~> 0.8'

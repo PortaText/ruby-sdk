@@ -11,6 +11,6 @@ SimpleCov.start do
   add_filter '/test/'
 end
 
-require 'portatext_sdk'
+require 'portatext'
 require 'minitest/autorun'
 require_relative 'helper/command_tester'
