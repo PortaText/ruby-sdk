@@ -7,7 +7,7 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Tariffs < PortaText::Test::Helper::CommandTester
-        def test_can_get_all_tarifs
+        def test_can_get_all_tariffs
           test_command 'tariffs' do |client|
             client
               .tariffs
@@ -15,7 +15,7 @@ module PortaText
           end
         end
 
-        def test_can_get_tarifs_for_country
+        def test_can_get_tariffs_for_country
           test_command 'tariffs/us' do |client|
             client
               .tariffs
