@@ -21,6 +21,7 @@ require_relative 'portatext/command/api/did_settings'
 require_relative 'portatext/command/api/credit_cards'
 require_relative 'portatext/command/api/email_verify'
 require_relative 'portatext/command/api/templates'
+require_relative 'portatext/command/api/sms'
 
 # The PortaText namespace.
 #
