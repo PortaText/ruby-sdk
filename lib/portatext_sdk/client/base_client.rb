@@ -53,11 +53,11 @@ module PortaText
       # rubocop:disable Metrics/MethodLength
       def error_for(code)
         errors = {
-          # 400 => PortaText::Exception::ClientError,
-          # 401 => PortaText::Exception::InvalidCredentials,
-          # 402 => PortaText::Exception::PaymentRequired,
-          # 403 => PortaText::Exception::Forbidden,
-          # 404 => PortaText::Exception::NotFound,
+          400 => PortaText::Exception::ClientError,
+          401 => PortaText::Exception::InvalidCredentials,
+          402 => PortaText::Exception::PaymentRequired,
+          403 => PortaText::Exception::Forbidden,
+          404 => PortaText::Exception::NotFound,
           405 => PortaText::Exception::InvalidMethod,
           415 => PortaText::Exception::InvalidMedia,
           429 => PortaText::Exception::RateLimited,

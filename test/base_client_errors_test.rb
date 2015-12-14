@@ -22,6 +22,13 @@ module PortaText
         end
       end
 
+      def test_invalid_media
+        client = CustomClient.new 415
+        assert_raises PortaText::Exception::InvalidMedia do
+          client.run 'some/endpoint', :post, 'application/json', '{}'
+        end
+      end
+
       def test_invalid_method
         client = CustomClient.new 405
         assert_raises PortaText::Exception::InvalidMethod do
@@ -29,9 +36,37 @@ module PortaText
         end
       end
 
-      def test_invalid_media
-        client = CustomClient.new 415
-        assert_raises PortaText::Exception::InvalidMedia do
+      def test_invalid_method
+        client = CustomClient.new 404
+        assert_raises PortaText::Exception::NotFound do
+          client.run 'some/endpoint', :post, 'application/json', '{}'
+        end
+      end
+
+      def test_invalid_method
+        client = CustomClient.new 403
+        assert_raises PortaText::Exception::Forbidden do
+          client.run 'some/endpoint', :post, 'application/json', '{}'
+        end
+      end
+
+      def test_invalid_method
+        client = CustomClient.new 402
+        assert_raises PortaText::Exception::PaymentRequired do
+          client.run 'some/endpoint', :post, 'application/json', '{}'
+        end
+      end
+
+      def test_invalid_method
+        client = CustomClient.new 401
+        assert_raises PortaText::Exception::InvalidCredentials do
+          client.run 'some/endpoint', :post, 'application/json', '{}'
+        end
+      end
+
+      def test_invalid_method
+        client = CustomClient.new 400
+        assert_raises PortaText::Exception::ClientError do
           client.run 'some/endpoint', :post, 'application/json', '{}'
         end
       end

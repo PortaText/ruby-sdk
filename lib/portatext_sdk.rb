@@ -7,6 +7,11 @@ require_relative 'portatext_sdk/exception/server_error'
 require_relative 'portatext_sdk/exception/rate_limited'
 require_relative 'portatext_sdk/exception/invalid_media'
 require_relative 'portatext_sdk/exception/invalid_method'
+require_relative 'portatext_sdk/exception/not_found'
+require_relative 'portatext_sdk/exception/forbidden'
+require_relative 'portatext_sdk/exception/payment_required'
+require_relative 'portatext_sdk/exception/invalid_credentials'
+require_relative 'portatext_sdk/exception/client_error'
 
 # The PortaText namespace.
 #
