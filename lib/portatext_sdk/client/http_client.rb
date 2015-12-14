@@ -18,7 +18,7 @@ module PortaText
           request! descriptor, http, request
         rescue => e
           raise ::PortaText::Exception::RequestError.new(
-            descriptor, e.message, e
+            descriptor, nil, e.message, e
           )
         end
       end
@@ -28,13 +28,13 @@ module PortaText
       def create_http(uri)
         http = Net::HTTP.new uri.host, uri.port
         http.use_ssl = uri.scheme == 'https'
-        http.verify_mode = ::OpenSSL::SSL::VERIFY_PEER
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER
         http
       end
 
       def create_request(uri, method, body)
         method = method.to_s.capitalize
-        request = ::Object.const_get("::Net::HTTP::#{method}").new uri
+        request = Object.const_get("Net::HTTP::#{method}").new uri
         request.body = body
         request
       end

@@ -67,14 +67,14 @@ module PortaText
           client.puts ''
           hash = {success: true}
           client.write hash.to_json
-          sleep 0.2
+          sleep 0.1
 
           client.close
           server.close
           Process.exit! true
         end
         client = PortaText::Client::HttpClient.new
-        sleep 0.2
+        sleep 0.1
         code, headers, body = client.execute PortaText::Command::Descriptor.new(
           "http://127.0.0.1:#{port}/some/endpoint",
           method,
