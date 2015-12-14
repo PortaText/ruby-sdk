@@ -14,8 +14,9 @@ module PortaText
       attr_writer :credentials
       attr_writer :executor
 
+      # rubocop:disable Metrics/MethodLength
       def run(endpoint, method, content_type, body, auth = nil)
-        auth ||= auth_method
+        auth ||= auth_method(auth)
         headers = form_headers content_type, auth
         descriptor = PortaText::Command::Descriptor.new(
           "#{@endpoint}/#{endpoint}", method, headers, body
@@ -24,8 +25,13 @@ module PortaText
         result = PortaText::Command::Result.new(
           ret_code, ret_headers, JSON.parse(ret_body)
         )
+        if ret_code.eql?(401) && auth.eql?(:session_token)
+          login!
+          result = run endpoint, method, content_type, body
+        end
         assert_result descriptor, result
       end
+      # rubocop:enable Metrics/MethodLength
 
       def initialize
         @logger = Logger.new nil
@@ -38,16 +44,23 @@ module PortaText
 
       private
 
+      def login!
+        result = run 'login', :post, 'application/json', '', :basic
+        @session_token = result.data['token']
+      end
+
       def assert_result(descriptor, result)
         error = error_for result.code
         return result if error.nil?
         fail error, [descriptor, result]
       end
 
-      def auth_method
+      def auth_method(auth_suggested)
+        return auth_suggested unless auth_suggested.nil?
         return :session_token unless @session_token.nil?
-        return :basic unless @credentials.nil?
-        :api_key
+        return :api_key unless @api_key.nil?
+        login!
+        :session_token
       end
 
       # rubocop:disable Metrics/MethodLength

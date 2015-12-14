@@ -1,6 +1,7 @@
 require 'test_helper'
 require 'socket'
 require 'tempfile'
+require 'fileutils'
 
 module PortaText
   module Test
@@ -46,10 +47,12 @@ module PortaText
       def run_method(method)
         port = rand(64_511) + 1_024
         recv_file = Tempfile.new "received#{port}"
+        accept_file = Dir::Tmpname.make_tmpname "/tmp/accept#{port}", nil
         Process.fork do
           server = TCPServer.new port
           server.setsockopt :SOCKET, :REUSEADDR, 1
           server.listen 10
+          FileUtils.touch accept_file
           client = server.accept
           buffer = ''
           loop do
@@ -67,14 +70,16 @@ module PortaText
           client.puts ''
           hash = {success: true}
           client.write hash.to_json
-          sleep 0.1
-
           client.close
           server.close
           Process.exit! true
         end
         client = PortaText::Client::HttpClient.new
-        sleep 0.1
+        loop do
+          break if File.exist? accept_file
+          sleep 0.05
+        end
+        sleep 0.05
         code, headers, body = client.execute PortaText::Command::Descriptor.new(
           "http://127.0.0.1:#{port}/some/endpoint",
           method,
@@ -93,6 +98,7 @@ module PortaText
         content = File.readlines recv_file
         assert "#{method.upcase} /some/endpoint HTTP/1.1" == content[0].chop
         recv_file.delete
+        File.unlink accept_file
       end
     end
   end
