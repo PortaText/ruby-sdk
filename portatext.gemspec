@@ -1,14 +1,11 @@
 Gem::Specification.new do |s|
   s.name        = 'portatext'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.summary     = 'Official PortaText API ruby client'
   s.description = 'This is the official PortaText API ruby client'
   s.authors     = ['PortaText']
   s.email       = 'hello@portatext.com'
-  s.files         = [
-    'Gemfile',
-    'lib/portatext'
-  ]
+  s.files       = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   s.require_paths = ['lib']
   s.homepage    = 'http://rubygems.org/gems/portatext'
   s.license     = 'Apache-2.0'
