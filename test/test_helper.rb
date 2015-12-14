@@ -13,3 +13,4 @@ end
 
 require 'portatext_sdk'
 require 'minitest/autorun'
+require_relative 'helper/command_tester'

@@ -13,13 +13,23 @@ module PortaText
       attr_writer :api_key
       attr_writer :credentials
       attr_writer :executor
+      attr_writer :logger
+
+      def method_missing(method, *_arguments, &_block)
+        name = "PortaText::Command::Api::#{method.to_s.capitalize}"
+        class_name = Object.const_get name
+        class_name.new self
+      end
 
       # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       def run(endpoint, method, content_type, body, auth = nil)
+        true_endpoint = "#{@endpoint}/#{endpoint}"
         auth ||= auth_method(auth)
         headers = form_headers content_type, auth
+        @logger.debug "Calling #{method} #{true_endpoint} with #{auth}"
         descriptor = PortaText::Command::Descriptor.new(
-          "#{@endpoint}/#{endpoint}", method, headers, body
+          true_endpoint, method, headers, body
         )
         ret_code, ret_headers, ret_body = @executor.execute descriptor
         result = PortaText::Command::Result.new(
@@ -32,6 +42,7 @@ module PortaText
         assert_result descriptor, result
       end
       # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
 
       def initialize
         @logger = Logger.new nil
