@@ -16,7 +16,8 @@ module PortaText
       attr_writer :logger
 
       def method_missing(method, *_arguments, &_block)
-        name = "PortaText::Command::Api::#{method.to_s.capitalize}"
+        method = method.to_s.split('_').map {|s| s.capitalize}
+        name = "PortaText::Command::Api::#{method.join('')}"
         class_name = Object.const_get name
         class_name.new self
       end

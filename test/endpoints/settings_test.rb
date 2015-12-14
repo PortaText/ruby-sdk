@@ -15,7 +15,7 @@ module PortaText
           end
         end
 
-        def test_disable_alert_on_low_credit
+        def test_can_disable_alert_on_low_credit
           test_command 'me/settings', {
             'alert_when_credit_less_than' => nil
           } do |client|
@@ -26,7 +26,7 @@ module PortaText
           end
         end
 
-        def test_enable_alert_on_low_credit
+        def test_can_enable_alert_on_low_credit
           test_command 'me/settings', {
             'alert_when_credit_less_than' => 100
           } do |client|
@@ -37,7 +37,7 @@ module PortaText
           end
         end
 
-        def test_enable_email_in_inbound_sms
+        def test_can_enable_email_in_inbound_sms
           test_command 'me/settings', {
             'email_on_inbound_sms' => 'john@doe.com'
           } do |client|
@@ -48,7 +48,7 @@ module PortaText
           end
         end
 
-        def test_disable_email_in_inbound_sms
+        def test_can_disable_email_in_inbound_sms
           test_command 'me/settings', {
             'email_on_inbound_sms' => nil
           } do |client|

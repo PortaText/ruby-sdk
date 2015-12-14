@@ -2,7 +2,7 @@ module PortaText
   module Command
     module Api
       # The me/settings endpoint.
-      # https://github.com/PortaText/docs/wiki/REST-API#api_me
+      # https://github.com/PortaText/docs/wiki/REST-API#api_settings
       #
       # Author::    Marcelo Gornstein (mailto:marcelog@portatext.com)
       # Copyright:: Copyright (c) 2015 PortaText
