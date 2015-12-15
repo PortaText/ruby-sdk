@@ -34,10 +34,12 @@ module PortaText
       end
 
       def content_type(_method)
+        return 'text/csv' unless @args[:file].nil?
         'application/json'
       end
 
       def body(_method)
+        return "file:#{@args[:file]}" unless @args[:file].nil?
         return '' if @args.size.eql? 0
         @args.to_json
       end

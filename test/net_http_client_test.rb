@@ -42,12 +42,25 @@ module PortaText
         run_method :patch
       end
 
+      def test_request_with_file
+        tmp_file = Tempfile.new "tmp"
+        tmp_file.write "these are the file contents"
+        tmp_file.close
+        run_method :post, tmp_file.path
+        tmp_file.delete
+      end
+
       private
 
-      def run_method(method)
+      def run_method(method, file = nil)
         port = 50_000
         recv_file = Tempfile.new "received#{port}"
         accept_file = Dir::Tmpname.make_tmpname "/tmp/accept#{port}", nil
+        body, size = if file.nil?
+          ['a body', 6]
+        else
+          [IO.binread(file), File.size(file)]
+        end
         Process.fork do
           server = TCPServer.new port
           server.setsockopt :SOCKET, :REUSEADDR, 1
@@ -58,7 +71,7 @@ module PortaText
           loop do
             new_buff = client.recv 2_048
             buffer = buffer + new_buff
-            break if /a body/ =~ buffer
+            break if buffer.match(body)
           end
           recv_file.write buffer
           recv_file.close
@@ -80,23 +93,27 @@ module PortaText
           sleep 0.05
         end
         sleep 0.05
-        code, headers, body = client.execute PortaText::Command::Descriptor.new(
-          "http://127.0.0.1:#{port}/some/endpoint",
-          method,
-          {
-            'header1' => 'value1'
-          },
-          "a body\r\n"
+        res_code, res_headers, res_body = client.execute(
+          PortaText::Command::Descriptor.new(
+            "http://127.0.0.1:#{port}/some/endpoint",
+            method, { 'header1' => 'value1' },
+            if file.nil?
+              body
+            else
+              "file:#{file}"
+            end
+          )
         )
-        assert code == 742
-        assert headers == {
+        assert res_code == 742
+        assert res_headers == {
           'connection' => 'close',
           'x-header1' => 'value1',
           'x-header2' => 'value2'
         }
-        assert body == '{"success":true}'
+        assert res_body == '{"success":true}'
         content = File.readlines recv_file
         assert "#{method.upcase} /some/endpoint HTTP/1.1" == content[0].chop
+        assert body == content[content.length - 1]
         recv_file.delete
         File.unlink accept_file
       end

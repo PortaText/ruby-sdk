@@ -33,6 +33,7 @@ module PortaText
           true_endpoint, method, headers, body
         )
         ret_code, ret_headers, ret_body = @executor.execute descriptor
+        @logger.debug "Got: #{ret_code} / #{ret_headers} / #{ret_body}"
         result = PortaText::Command::Result.new(
           ret_code, ret_headers, JSON.parse(ret_body)
         )

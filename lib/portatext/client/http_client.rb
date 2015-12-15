@@ -32,12 +32,21 @@ module PortaText
         http
       end
 
+      # rubocop:disable Metrics/MethodLength
       def create_request(uri, method, body)
         method = method.to_s.capitalize
         request = Object.const_get("Net::HTTP::#{method}").new uri
-        request.body = body
+        data = /^file:(.*)$/.match(body)
+        if data.nil?
+          request.body = body
+        else
+          file = data.captures.shift
+          request.content_length = File.size file
+          request.body_stream = File.open file, 'r'
+        end
         request
       end
+      # rubocop:enable Metrics/MethodLength
 
       def request!(descriptor, http, request)
         descriptor.headers.each_pair do |k, v|
