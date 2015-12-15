@@ -31,6 +31,7 @@ require_relative 'portatext/command/api/did_search'
 require_relative 'portatext/command/api/blacklist'
 require_relative 'portatext/command/api/campaigns'
 require_relative 'portatext/command/api/sms_campaign'
+require_relative 'portatext/command/api/campaign_lifecycle'
 
 # The PortaText namespace.
 #
