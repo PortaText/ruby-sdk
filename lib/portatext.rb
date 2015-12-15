@@ -27,6 +27,7 @@ require_relative 'portatext/command/api/cnam'
 require_relative 'portatext/command/api/recharge'
 require_relative 'portatext/command/api/jobs'
 require_relative 'portatext/command/api/contact_lists'
+require_relative 'portatext/command/api/did_search'
 
 # The PortaText namespace.
 #
