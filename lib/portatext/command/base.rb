@@ -8,6 +8,8 @@ module PortaText
     # Copyright:: Copyright (c) 2015 PortaText
     # License::   Apache-2.0
     class Base
+      attr_writer :client
+
       def get
         run :get
       end
@@ -44,8 +46,7 @@ module PortaText
         @args.to_json
       end
 
-      def initialize(client)
-        @client = client
+      def initialize
         @args = {}
       end
 

@@ -19,7 +19,9 @@ module PortaText
         method = method.to_s.split('_').map(&:capitalize)
         name = "PortaText::Command::Api::#{method.join('')}"
         class_name = Object.const_get name
-        class_name.new self
+        command = class_name.new
+        command.client = self
+        command
       end
 
       # rubocop:disable Metrics/MethodLength
