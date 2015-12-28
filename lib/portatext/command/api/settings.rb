@@ -24,9 +24,8 @@ module PortaText
           set :email_on_inbound_sms, email
         end
 
-        def enable_autorecharges(when_credit, card_id, plan_id, total)
+        def enable_autorecharges(when_credit, card_id, total)
           set :autorecharge_enabled, true
-          set :autorecharge_plan_id, plan_id
           set :autorecharge_card_id, card_id
           set :autorecharge_total, total
           set :autorecharge_when_credit, when_credit

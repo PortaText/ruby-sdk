@@ -12,8 +12,7 @@ module PortaText
           set :card_id, card_id
         end
 
-        def total(plan_id, total)
-          set :plan_id, plan_id
+        def total(total)
           set :total, total
         end
 
