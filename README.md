@@ -1,6 +1,6 @@
 [![License](http://img.shields.io/badge/license-APACHE2-blue.svg)](http://img.shields.io/badge/license-APACHE2-blue.svg)
 [![Gem Version](https://badge.fury.io/rb/portatext.svg)](https://badge.fury.io/rb/portatext)
-[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/portatext/ruby-sdk/1.1.0)
+[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/portatext/ruby-sdk)
 
 [![Build Status](https://travis-ci.org/PortaText/ruby-sdk.svg)](https://travis-ci.org/PortaText/ruby-sdk)
 [![Coverage Status](https://coveralls.io/repos/PortaText/ruby-sdk/badge.svg?branch=master&service=github)](https://coveralls.io/github/PortaText/ruby-sdk?branch=master)
