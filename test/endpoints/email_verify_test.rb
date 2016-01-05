@@ -20,7 +20,7 @@ module PortaText
             client
               .email_verify
               .with_nonce('a_nonce')
-              .get
+              .post
           end
         end
       end
