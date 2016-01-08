@@ -11,12 +11,14 @@ module PortaText
       attr_accessor :method
       attr_accessor :headers
       attr_accessor :body
+      attr_accessor :output_file
 
-      def initialize(uri, method, headers, body)
+      def initialize(uri, method, headers, body, output_file = nil)
         @uri = uri
         @method = method
         @headers = headers
         @body = body
+        @output_file = output_file
       end
     end
   end

@@ -17,14 +17,18 @@ module PortaText
           descriptor.headers == {
             'Content-Type' => 'some/type',
             'X-Api-Key' => 'an_api_key',
-            'Accept' => 'application/json'
+            'Accept' => 'other/type'
           } &&
-          descriptor.body == 'body'
+          descriptor.body == 'body' &&
+          descriptor.output_file == 'output_file'
         end
         client = PortaText::Client::BaseClient.new
         client.api_key = 'an_api_key'
         client.executor = mock
-        client.run "some/endpoint", :method, 'some/type', 'body'
+        client.run(
+          'some/endpoint', :method, 'some/type',
+          'other/type', 'body', 'output_file'
+        )
         assert mock.verify
       end
     end

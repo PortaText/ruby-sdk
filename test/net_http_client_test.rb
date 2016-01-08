@@ -42,7 +42,7 @@ module PortaText
         run_method :patch
       end
 
-      def test_request_with_file
+      def test_request_send_file
         tmp_file = Tempfile.new "tmp"
         tmp_file.write "these are the file contents"
         tmp_file.close
@@ -50,9 +50,16 @@ module PortaText
         tmp_file.delete
       end
 
+      def test_request_save_to_file
+        tmp_file = Tempfile.new "tmp"
+        tmp_file.close
+        run_method :post, nil, tmp_file.path
+        tmp_file.delete
+      end
+
       private
 
-      def run_method(method, file = nil)
+      def run_method(method, file = nil, output_file = nil)
         port = 50_000
         recv_file = Tempfile.new "received#{port}"
         accept_file = Dir::Tmpname.make_tmpname "/tmp/accept#{port}", nil
@@ -101,7 +108,8 @@ module PortaText
               body
             else
               "file:#{file}"
-            end
+            end,
+            output_file
           )
         )
         assert res_code == 742
@@ -110,7 +118,11 @@ module PortaText
           'x-header1' => 'value1',
           'x-header2' => 'value2'
         }
-        assert res_body == '{"success":true}'
+        if output_file.nil?
+          assert res_body == '{"success":true}'
+        else
+          assert File.readlines(output_file).shift == '{"success":true}'
+        end
         content = File.readlines recv_file
         assert "#{method.upcase} /some/endpoint HTTP/1.1" == content[0].chop
         assert body == content[content.length - 1]

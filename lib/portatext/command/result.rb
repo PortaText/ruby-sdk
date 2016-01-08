@@ -15,7 +15,7 @@ module PortaText
         @code = code
         @headers = headers
         @data = data
-        @success = code > 199 && code < 300 && data['success']
+        @success = code > 199 && code < 300
       end
     end
   end

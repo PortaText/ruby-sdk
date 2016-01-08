@@ -48,16 +48,31 @@ module PortaText
       end
       # rubocop:enable Metrics/MethodLength
 
-      def request!(descriptor, http, request)
-        descriptor.headers.each_pair do |k, v|
-          request[k] = v
+      def writer_proc(file)
+        if file.nil?
+          nil
+        else
+          proc do |response|
+            open file, 'w+' do |io|
+              response.read_body { |chunk| io.write chunk }
+            end
+          end
         end
-        result = http.request request
-        headers = result.to_hash.each_with_object({}) do |(k, v), acc|
+      end
+
+      def normalize_headers(result)
+        result.to_hash.each_with_object({}) do |(k, v), acc|
           acc[k.downcase] = v.shift
           acc
         end
-        [result.code.to_i, headers, result.body]
+      end
+
+      def request!(descriptor, http, request)
+        descriptor.headers.each_pair { |k, v| request[k] = v }
+        body = nil
+        result = http.request request, &(writer_proc descriptor.output_file)
+        body = result.body if descriptor.output_file.nil?
+        [result.code.to_i, normalize_headers(result), body]
       end
     end
   end

@@ -40,6 +40,11 @@ module PortaText
         'application/json'
       end
 
+      def accept_content_type(_method)
+        return 'text/csv' unless @args[:accept_file].nil?
+        'application/json'
+      end
+
       def body(_method)
         return "file:#{@args[:file]}" unless @args[:file].nil?
         return '' if @args.size.eql? 0
@@ -53,7 +58,14 @@ module PortaText
       private
 
       def run(method)
-        @client.run endpoint(method), method, content_type(method), body(method)
+        a_type = accept_content_type method
+        command_endpoint = endpoint(method)
+        file = @args[:accept_file]
+        @args.delete :accept_file
+        @client.run(
+          command_endpoint, method, content_type(method),
+          a_type, body(method), file
+        )
       end
     end
   end

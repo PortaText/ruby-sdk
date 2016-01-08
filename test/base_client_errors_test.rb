@@ -12,7 +12,9 @@ module PortaText
         client = CustomClient.new 500
         client.api_key = 'an_api_key'
         assert_raises PortaText::Exception::ServerError do
-          client.run 'some/endpoint', :post, 'application/json', '{}'
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json', '{}'
+          )
         end
       end
 
@@ -20,7 +22,9 @@ module PortaText
         client = CustomClient.new 429
         client.api_key = 'an_api_key'
         assert_raises PortaText::Exception::RateLimited do
-          client.run 'some/endpoint', :post, 'application/json', '{}'
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json', '{}'
+          )
         end
       end
 
@@ -28,7 +32,9 @@ module PortaText
         client = CustomClient.new 415
         client.api_key = 'an_api_key'
         assert_raises PortaText::Exception::InvalidMedia do
-          client.run 'some/endpoint', :post, 'application/json', '{}'
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json', '{}'
+          )
         end
       end
 
@@ -36,14 +42,18 @@ module PortaText
         client = CustomClient.new 405
         client.api_key = 'an_api_key'
         assert_raises PortaText::Exception::InvalidMethod do
-          client.run 'some/endpoint', :post, 'application/json', '{}'
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json', '{}'
+          )
         end
       end
 
       def test_invalid_method
         client = CustomClient.new 404
         assert_raises PortaText::Exception::NotFound do
-          client.run 'some/endpoint', :post, 'application/json', '{}'
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json', '{}'
+          )
         end
       end
 
@@ -51,7 +61,9 @@ module PortaText
         client = CustomClient.new 403
         client.api_key = 'an_api_key'
         assert_raises PortaText::Exception::Forbidden do
-          client.run 'some/endpoint', :post, 'application/json', '{}'
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json', '{}'
+          )
         end
       end
 
@@ -59,7 +71,9 @@ module PortaText
         client = CustomClient.new 402
         client.api_key = 'an_api_key'
         assert_raises PortaText::Exception::PaymentRequired do
-          client.run 'some/endpoint', :post, 'application/json', '{}'
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json', '{}'
+          )
         end
       end
 
@@ -67,7 +81,9 @@ module PortaText
         client = CustomClient.new 401
         client.api_key = 'an_api_key'
         assert_raises PortaText::Exception::InvalidCredentials do
-          client.run 'some/endpoint', :post, 'application/json', '{}'
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json', '{}'
+          )
         end
       end
 
@@ -75,7 +91,9 @@ module PortaText
         client = CustomClient.new 400
         client.api_key = 'an_api_key'
         assert_raises PortaText::Exception::ClientError do
-          client.run 'some/endpoint', :post, 'application/json', '{}'
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json', '{}'
+          )
         end
       end
     end

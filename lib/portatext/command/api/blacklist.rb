@@ -16,7 +16,12 @@ module PortaText
           set :file, file
         end
 
+        def save_to(file)
+          set :accept_file, file
+        end
+
         def endpoint(_method)
+          return 'blacklist/contacts' unless @args[:accept_file].nil?
           return 'blacklist/contacts' unless @args[:file].nil?
           return 'blacklist' if @args[:number].nil?
           number = @args[:number]

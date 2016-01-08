@@ -26,27 +26,35 @@ module PortaText
 
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
-      def run(endpoint, method, content_type, body, auth = nil)
+      # rubocop:disable Metrics/ParameterLists
+      def run(
+        endpoint, method, content_type, accept_content_type,
+        body, output_file = nil, auth = nil
+      )
         true_endpoint = "#{@endpoint}/#{endpoint}"
         auth ||= auth_method(auth)
-        headers = form_headers content_type, auth
+        headers = form_headers content_type, accept_content_type, auth
         @logger.debug "Calling #{method} #{true_endpoint} with #{auth}"
         descriptor = PortaText::Command::Descriptor.new(
-          true_endpoint, method, headers, body
+          true_endpoint, method, headers, body, output_file
         )
         ret_code, ret_headers, ret_body = @executor.execute descriptor
         @logger.debug "Got: #{ret_code} / #{ret_headers} / #{ret_body}"
-        result = PortaText::Command::Result.new(
-          ret_code, ret_headers, JSON.parse(ret_body)
-        )
+        ret_body = '{}' if ret_body.nil?
+        ret_body = JSON.parse ret_body
+        result = PortaText::Command::Result.new ret_code, ret_headers, ret_body
         if ret_code.eql?(401) && auth.eql?(:session_token)
           login!
-          result = run endpoint, method, content_type, body
+          result = run(
+            endpoint, method, content_type, accept_content_type,
+            body, output_file, auth
+          )
         end
         assert_result descriptor, result
       end
       # rubocop:enable Metrics/MethodLength
       # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/ParameterLists
 
       def initialize
         @logger = Logger.new nil
@@ -60,7 +68,10 @@ module PortaText
       private
 
       def login!
-        result = run 'login', :post, 'application/json', '', :basic
+        result = run(
+          'login', :post, 'application/json', 'application/json',
+          '', nil, :basic
+        )
         @session_token = result.data['token']
       end
 
@@ -94,10 +105,10 @@ module PortaText
         errors[code]
       end
 
-      def form_headers(content_type, auth)
+      def form_headers(content_type, accept_content_type, auth)
         headers = {
           'Content-Type' => content_type,
-          'Accept' => 'application/json'
+          'Accept' => accept_content_type
         }
         case auth
         when :session_token

@@ -68,15 +68,22 @@ module PortaText
         client = PortaText::Client::BaseClient.new
         client.credentials = ["username", "password"]
         client.executor = mock
-        client.run "some/endpoint", :post, 'application/json', 'body'
-        client.run "some/endpoint", :post, 'application/json', 'body'
+        client.run(
+          'some/endpoint', :post, 'application/json', 'application/json', 'body'
+        )
+        client.run(
+          'some/endpoint', :post, 'application/json', 'application/json', 'body'
+        )
         assert mock.verify
       end
 
       def test_cant_use_unknown_auth_method
         client = PortaText::Client::BaseClient.new
         assert_raises RuntimeError do
-          client.run "some/endpoint", :post, 'application/json', 'body', 'derp'
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json',
+            'body', nil, 'derp'
+          )
         end
       end
 
@@ -97,7 +104,10 @@ module PortaText
         client = PortaText::Client::BaseClient.new
         client.credentials = ["username", "password"]
         client.executor = mock
-        client.run "some/endpoint", :post, 'application/json', 'body', :basic
+        client.run(
+          'some/endpoint', :post, 'application/json', 'application/json',
+          'body', nil, :basic
+        )
         assert mock.verify
       end
 
@@ -116,7 +126,9 @@ module PortaText
         client = PortaText::Client::BaseClient.new
         client.api_key = 'an_api_key'
         client.executor = mock
-        client.run "some/endpoint", :post, 'application/json', 'body'
+        client.run(
+          'some/endpoint', :post, 'application/json', 'application/json', 'body'
+        )
         assert mock.verify
       end
     end
