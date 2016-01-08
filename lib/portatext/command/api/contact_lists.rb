@@ -24,11 +24,16 @@ module PortaText
           set :file, file
         end
 
+        def save_to(file)
+          set :accept_file, file
+        end
+
         def endpoint(_method)
           return 'contact_lists' if @args[:id].nil?
           id = @args[:id]
           @args.delete :id
           return "contact_lists/#{id}/contacts" unless @args[:file].nil?
+          return "contact_lists/#{id}/contacts" unless @args[:accept_file].nil?
           "contact_lists/#{id}"
         end
       end

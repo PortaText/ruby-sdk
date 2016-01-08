@@ -8,8 +8,9 @@ module PortaText
       # License::   Apache-2.0
       class Blacklist < PortaText::Test::Helper::CommandTester
         def test_can_save_blacklist_to_csv
-          test_command 'blacklist/contacts' do |client|
-            client
+          test_command(
+            'blacklist/contacts', '', 'application/json', 'text/csv'
+          ) do |client|            client
               .blacklist
               .save_to('/tmp/blacklist.csv')
               .get

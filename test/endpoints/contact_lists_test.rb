@@ -7,6 +7,18 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class ContactLists < PortaText::Test::Helper::CommandTester
+        def test_can_save_contact_list_to_csv
+          test_command(
+            'contact_lists/33/contacts', '', 'application/json', 'text/csv'
+          ) do |client|
+            client
+              .contact_lists
+              .id(33)
+              .save_to('/tmp/contact_list.csv')
+              .get
+          end
+        end
+
         def test_can_create_contact_list
           test_command 'contact_lists', {
             :name => 'this is the name',

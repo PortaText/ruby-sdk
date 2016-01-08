@@ -13,6 +13,7 @@ module PortaText
           assert_endpoint = nil,
           assert_body = '',
           assert_content_type = 'application/json',
+          assert_accept_content_type = 'application/json',
           &block
         )
           mock = MiniTest::Mock.new
@@ -26,6 +27,7 @@ module PortaText
             endpoint = "#{PortaText::DEFAULT_ENDPOINT}/#{assert_endpoint}"
             descriptor.uri == endpoint &&
             descriptor.headers['Content-Type'] == assert_content_type &&
+            descriptor.headers['Accept'] == assert_accept_content_type &&
             descriptor.body == assert_body
           end
 
