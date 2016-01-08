@@ -17,8 +17,10 @@ module PortaText
 
       def method_missing(method, *_arguments, &_block)
         method = method.to_s.split('_').map(&:capitalize)
-        name = "PortaText::Command::Api::#{method.join('')}"
-        class_name = Object.const_get name
+        class_name = Object.const_get('PortaText')
+                     .const_get('Command')
+                     .const_get('Api')
+                     .const_get(method.join(''))
         command = class_name.new
         command.client = self
         command

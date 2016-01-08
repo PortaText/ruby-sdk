@@ -35,7 +35,10 @@ module PortaText
       # rubocop:disable Metrics/MethodLength
       def create_request(uri, method, body)
         method = method.to_s.capitalize
-        request = Object.const_get("Net::HTTP::#{method}").new uri
+        request = Object.const_get('Net')
+                  .const_get('HTTP')
+                  .const_get(method)
+                  .new uri
         data = /^file:(.*)$/.match(body)
         if data.nil?
           request.body = body
