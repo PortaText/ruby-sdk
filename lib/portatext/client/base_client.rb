@@ -8,6 +8,7 @@ module PortaText
     # Author::    Marcelo Gornstein (mailto:marcelog@portatext.com)
     # Copyright:: Copyright (c) 2015 PortaText
     # License::   Apache-2.0
+    # rubocop:disable Metrics/ClassLength
     class BaseClient
       attr_writer :endpoint
       attr_writer :api_key
@@ -100,6 +101,7 @@ module PortaText
           403 => PortaText::Exception::Forbidden,
           404 => PortaText::Exception::NotFound,
           405 => PortaText::Exception::InvalidMethod,
+          406 => PortaText::Exception::NotAcceptable,
           415 => PortaText::Exception::InvalidMedia,
           429 => PortaText::Exception::RateLimited,
           500 => PortaText::Exception::ServerError

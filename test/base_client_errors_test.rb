@@ -38,6 +38,16 @@ module PortaText
         end
       end
 
+      def test_not_acceptable
+        client = CustomClient.new 406
+        client.api_key = 'an_api_key'
+        assert_raises PortaText::Exception::NotAcceptable do
+          client.run(
+            'some/endpoint', :post, 'application/json', 'application/json', '{}'
+          )
+        end
+      end
+
       def test_invalid_method
         client = CustomClient.new 405
         client.api_key = 'an_api_key'
