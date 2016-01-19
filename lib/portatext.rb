@@ -42,5 +42,5 @@ require_relative 'portatext/command/api/variables'
 # Copyright:: Copyright (c) 2015 PortaText
 # License::   Apache-2.0
 module PortaText
-  DEFAULT_ENDPOINT = 'https://rest.portatext.com'
+  DEFAULT_ENDPOINT = 'https://rest.portatext.com'.freeze
 end
