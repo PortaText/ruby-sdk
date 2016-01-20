@@ -28,13 +28,26 @@ module PortaText
           set :contact_list_ids, contact_lists
         end
 
+        def csv(file)
+          set :file, file
+        end
+
+        # rubocop:disable Metrics/MethodLength
         def endpoint(_method)
+          unless @args[:file].nil?
+            settings = @args.clone
+            settings.delete :file
+            settings = settings.to_json
+            settings = URI.encode_www_form('settings' => settings)
+            return "campaigns?#{settings}"
+          end
           return 'campaigns' if @args[:id].nil?
           id = @args[:id]
           @args.delete :type
           @args.delete :id
           "campaigns/#{id}"
         end
+        # rubocop:enable Metrics/MethodLength
       end
     end
   end

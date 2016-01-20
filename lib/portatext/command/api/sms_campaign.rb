@@ -9,12 +9,11 @@ module PortaText
       # License::   Apache-2.0
       class SmsCampaign < Campaigns
         def use_template(template_id, variables)
-          set :template_id, template_id
-          set :variables, variables
+          set :settings, template_id: template_id, variables: variables
         end
 
         def text(text)
-          set :text, text
+          set :settings, text: text
         end
 
         def initialize
