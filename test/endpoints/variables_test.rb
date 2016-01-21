@@ -8,7 +8,7 @@ module PortaText
       # License::   Apache-2.0
       class Variables < PortaText::Test::Helper::CommandTester
         def test_can_delete_all_variables
-          test_command 'contact/12223334444/variables' do |client|
+          test_command 'contacts/12223334444/variables' do |client|
             client
               .variables
               .for_contact('12223334444')
@@ -17,7 +17,7 @@ module PortaText
         end
 
         def test_can_delete_one_variable
-          test_command 'contact/12223334444/variables/first_name' do |client|
+          test_command 'contacts/12223334444/variables/first_name' do |client|
             client
               .variables
               .for_contact('12223334444')
@@ -27,7 +27,7 @@ module PortaText
         end
 
         def test_can_get_all_variables
-          test_command 'contact/12223334444/variables' do |client|
+          test_command 'contacts/12223334444/variables' do |client|
             client
               .variables
               .for_contact('12223334444')
@@ -36,7 +36,7 @@ module PortaText
         end
 
         def test_can_get_one_variable
-          test_command 'contact/12223334444/variables/first_name' do |client|
+          test_command 'contacts/12223334444/variables/first_name' do |client|
             client
               .variables
               .for_contact('12223334444')
@@ -46,7 +46,7 @@ module PortaText
         end
 
         def test_can_put_all_variables
-          test_command 'contact/12223334444/variables', {
+          test_command 'contacts/12223334444/variables', {
             :variables => [
               {:key => 'first_name', :value => 'John'},
               {:key => 'last_name', :value => 'Doe'}
@@ -64,7 +64,7 @@ module PortaText
         end
 
         def test_can_put_one_variable
-          test_command 'contact/12223334444/variables/first_name', {
+          test_command 'contacts/12223334444/variables/first_name', {
             :value => 'John'
           } do |client|
             client

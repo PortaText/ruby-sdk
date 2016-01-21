@@ -33,10 +33,10 @@ module PortaText
         def endpoint(_method)
           number = @args[:number]
           @args.delete :number
-          return "contact/#{number}/variables" if @args[:name].nil?
+          return "contacts/#{number}/variables" if @args[:name].nil?
           name = @args[:name]
           @args.delete :name
-          "contact/#{number}/variables/#{name}"
+          "contacts/#{number}/variables/#{name}"
         end
       end
     end
