@@ -21,6 +21,14 @@ module PortaText
           set :value, value
         end
 
+        def csv(file)
+          set :file, file
+        end
+
+        def save_to(file)
+          set :accept_file, file
+        end
+
         # rubocop:disable Style/AccessorMethodName
         def set_all(variables)
           variables = variables.reduce([]) do |acc, v|
@@ -31,6 +39,7 @@ module PortaText
         # rubocop:enable Style/AccessorMethodName
 
         def endpoint(_method)
+          return 'contacts/variables' if @args[:number].nil?
           number = @args[:number]
           @args.delete :number
           return "contacts/#{number}/variables" if @args[:name].nil?

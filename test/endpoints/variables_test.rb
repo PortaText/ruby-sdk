@@ -74,6 +74,31 @@ module PortaText
               .put
           end
         end
+
+        def test_can_export_all_variables_to_csv
+          test_command(
+            'contacts/variables', '', 'application/json', 'text/csv'
+          ) do |client|
+            client
+              .variables
+              .save_to('/tmp/contacts.csv')
+              .get
+          end
+        end
+
+        def test_can_import_all_variables_from_csv
+          test_command(
+            'contacts/variables',
+            'file:/tmp/contacts.csv',
+            'text/csv',
+            'application/json'
+          ) do |client|
+            client
+              .variables
+              .csv('/tmp/contacts.csv')
+              .put
+          end
+        end
       end
     end
   end
