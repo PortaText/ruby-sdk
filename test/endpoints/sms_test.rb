@@ -7,6 +7,24 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Sms < PortaText::Test::Helper::CommandTester
+        def test_can_send_to_contact_lists
+          test_command 'sms', {
+            :from => '12223334444',
+            :contact_list_ids => [1, 2],
+            :template_id => 44,
+            :variables => { :var1 => 'value' },
+            :client_ref => 'custom_client_ref'
+          } do |client|
+            client
+              .sms
+              .from('12223334444')
+              .to_contact_lists([1, 2])
+              .use_template(44, { :var1 => 'value' })
+              .client_ref('custom_client_ref')
+              .post
+          end
+        end
+
         def test_can_send_message_with_template
           test_command 'sms', {
             :from => '12223334444',

@@ -33,6 +33,10 @@ module PortaText
           set :client_ref, client_ref
         end
 
+        def to_contact_lists(contact_lists)
+          set :contact_list_ids, contact_lists
+        end
+
         def endpoint(_method)
           return 'sms' if @args[:id].nil?
           id = @args[:id]
