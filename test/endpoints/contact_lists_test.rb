@@ -15,7 +15,7 @@ module PortaText
               .contact_lists
               .id(33)
               .with_number('12223334444')
-              .get
+              .put
           end
         end
 
