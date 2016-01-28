@@ -7,6 +7,30 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class ContactLists < PortaText::Test::Helper::CommandTester
+        def test_can_add_number_to_contact_list
+          test_command(
+            'contact_lists/33/contacts/12223334444'
+          ) do |client|
+            client
+              .contact_lists
+              .id(33)
+              .with_number('12223334444')
+              .get
+          end
+        end
+
+        def test_can_delete_number_from_contact_list
+          test_command(
+            'contact_lists/33/contacts/12223334444'
+          ) do |client|
+            client
+              .contact_lists
+              .id(33)
+              .with_number('12223334444')
+              .delete
+          end
+        end
+
         def test_can_save_contact_list_to_csv
           test_command(
             'contact_lists/33/contacts', '', 'application/json', 'text/csv'

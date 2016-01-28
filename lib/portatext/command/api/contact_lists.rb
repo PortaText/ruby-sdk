@@ -28,10 +28,17 @@ module PortaText
           set :accept_file, file
         end
 
+        def with_number(number)
+          set :number, number
+        end
+
         def endpoint(_method)
           return 'contact_lists' if @args[:id].nil?
           id = @args[:id]
           @args.delete :id
+          number = @args[:number]
+          @args.delete :number
+          return "contact_lists/#{id}/contacts/#{number}" unless number.nil?
           return "contact_lists/#{id}/contacts" unless @args[:file].nil?
           return "contact_lists/#{id}/contacts" unless @args[:accept_file].nil?
           "contact_lists/#{id}"
