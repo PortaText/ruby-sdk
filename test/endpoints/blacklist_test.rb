@@ -7,6 +7,16 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Blacklist < PortaText::Test::Helper::CommandTester
+        def test_can_check_for_blacklisted_number
+          test_command('blacklist/12223334444'
+          ) do |client|
+            client
+              .blacklist
+              .number('12223334444')
+              .get
+          end
+        end
+
         def test_can_save_blacklist_to_csv
           test_command(
             'blacklist/contacts', '', 'application/json', 'text/csv'
