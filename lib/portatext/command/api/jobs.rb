@@ -12,8 +12,16 @@ module PortaText
           set :id, id
         end
 
+        def page(page)
+          set :page, page
+        end
+
         def endpoint(_method)
-          return 'jobs' if @args[:id].nil?
+          page = @args[:page]
+          @args.delete :page
+          endpoint = 'jobs'
+          endpoint = "jobs?page=#{page}" unless page.nil?
+          return endpoint if @args[:id].nil?
           id = @args[:id]
           @args.delete :id
           "jobs/#{id}"
