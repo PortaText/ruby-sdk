@@ -20,10 +20,17 @@ module PortaText
           set :accept_file, file
         end
 
+        def page(page)
+          set :page, page
+        end
+
         def endpoint(_method)
           return 'blacklist/contacts' unless @args[:accept_file].nil?
           return 'blacklist/contacts' unless @args[:file].nil?
-          return 'blacklist' if @args[:number].nil?
+          page = @args[:page]
+          @args.delete :page
+          page ||= 1
+          return "blacklist?page=#{page}" if @args[:number].nil?
           number = @args[:number]
           @args.delete :number
           "blacklist/#{number}"
