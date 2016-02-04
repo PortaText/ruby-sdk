@@ -13,7 +13,7 @@ module PortaText
         end
 
         def endpoint(_method)
-          fail 'DID number cant be null' if @args[:number].nil?
+          raise 'DID number cant be null' if @args[:number].nil?
           number = @args[:number]
           @args.delete :number
           "cnam/#{number}"

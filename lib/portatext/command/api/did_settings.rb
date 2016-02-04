@@ -30,7 +30,7 @@ module PortaText
         end
 
         def endpoint(_method)
-          fail 'DID number cant be null' if @args[:id].nil?
+          raise 'DID number cant be null' if @args[:id].nil?
           id = @args[:id]
           @args.delete :id
           "me/dids/#{id}"

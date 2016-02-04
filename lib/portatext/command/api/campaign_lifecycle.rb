@@ -29,7 +29,7 @@ module PortaText
         end
 
         def endpoint(_method)
-          fail 'Campaign id cant be null' if @args[:id].nil?
+          raise 'Campaign id cant be null' if @args[:id].nil?
           id = @args[:id]
           @args.delete :id
           "campaigns/#{id}/lifecycle"

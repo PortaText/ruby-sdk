@@ -81,7 +81,7 @@ module PortaText
       def assert_result(descriptor, result)
         error = error_for result.code
         return result if error.nil?
-        fail error, [descriptor, result]
+        raise error, [descriptor, result]
       end
 
       def auth_method(auth_suggested)
@@ -123,7 +123,7 @@ module PortaText
         when :api_key
           headers['X-Api-Key'] = @api_key
         else
-          fail "Invalid auth type: #{auth}"
+          raise "Invalid auth type: #{auth}"
         end
         headers
       end
