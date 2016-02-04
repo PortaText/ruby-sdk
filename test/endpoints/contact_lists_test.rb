@@ -7,6 +7,16 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class ContactLists < PortaText::Test::Helper::CommandTester
+        def test_can_paginate_contacts
+          test_command('contact_lists/33/contacts?page=55') do |client|
+            client
+              .contact_lists
+              .id(33)
+              .page(55)
+              .get
+          end
+        end
+
         def test_can_add_number_to_contact_list
           test_command(
             'contact_lists/33/contacts/12223334444'

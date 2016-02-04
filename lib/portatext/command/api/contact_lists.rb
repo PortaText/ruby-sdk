@@ -32,17 +32,28 @@ module PortaText
           set :number, number
         end
 
+        def page(page)
+          set :page, page
+        end
+
+        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/AbcSize
         def endpoint(_method)
           return 'contact_lists' if @args[:id].nil?
           id = @args[:id]
           @args.delete :id
           number = @args[:number]
           @args.delete :number
+          page = @args[:page]
+          @args.delete :page
           return "contact_lists/#{id}/contacts/#{number}" unless number.nil?
           return "contact_lists/#{id}/contacts" unless @args[:file].nil?
           return "contact_lists/#{id}/contacts" unless @args[:accept_file].nil?
+          return "contact_lists/#{id}/contacts?page=#{page}" unless page.nil?
           "contact_lists/#{id}"
         end
+        # rubocop:enable Metrics/AbcSize
+        # rubocop:enable Metrics/MethodLength
       end
     end
   end
