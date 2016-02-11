@@ -1,15 +1,23 @@
 module PortaText
   module Command
     module Api
-      # The variables endpoint.
-      # https://github.com/PortaText/docs/wiki/REST-API#api_variables
+      # The contacts endpoint.
+      # https://github.com/PortaText/docs/wiki/REST-API#api_all_contacts
       #
       # Author::    Marcelo Gornstein (mailto:marcelog@portatext.com)
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
-      class Variables < Base
-        def for_contact(number)
+      class Contacts < Base
+        def id(number)
           set :number, number
+        end
+
+        def with_contact_lists
+          set :with_contact_lists, true
+        end
+
+        def page(page)
+          set :page, page
         end
 
         def name(name)
@@ -38,8 +46,20 @@ module PortaText
         end
         # rubocop:enable Style/AccessorMethodName
 
+        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/AbcSize
         def endpoint(_method)
-          return 'contacts/variables' if @args[:number].nil?
+          qs = {}
+          unless @args[:page].nil?
+            qs['page'] = @args[:page]
+            @args.delete :page
+          end
+          unless @args[:with_contact_lists].nil?
+            qs['with_contact_lists'] = 'true'
+            @args.delete :with_contact_lists
+          end
+          qs = URI.encode_www_form qs
+          return "contacts?#{qs}" if @args[:number].nil?
           number = @args[:number]
           @args.delete :number
           return "contacts/#{number}/variables" if @args[:name].nil?
@@ -47,6 +67,8 @@ module PortaText
           @args.delete :name
           "contacts/#{number}/variables/#{name}"
         end
+        # rubocop:enable Metrics/MethodLength
+        # rubocop:enable Metrics/AbcSize
       end
     end
   end
