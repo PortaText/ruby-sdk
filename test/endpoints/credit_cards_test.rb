@@ -8,7 +8,7 @@ module PortaText
       # License::   Apache-2.0
       class Settings < PortaText::Test::Helper::CommandTester
         def test_can_delete_credit_card
-          test_command 'me/credit_cards/44' do |client|
+          test_command 'credit_cards/44' do |client|
             client
               .credit_cards
               .id(44)
@@ -17,7 +17,7 @@ module PortaText
         end
 
         def test_can_get_all_credit_cards
-          test_command 'me/credit_cards' do |client|
+          test_command 'credit_cards' do |client|
             client
               .credit_cards
               .get
@@ -25,7 +25,7 @@ module PortaText
         end
 
         def test_can_create_credit_card
-          test_command 'me/credit_cards', {
+          test_command 'credit_cards', {
             :first_name => 'John',
             :last_name => 'Doe',
             :address => '1234 NW 12TH STREET',

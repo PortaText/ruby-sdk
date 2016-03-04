@@ -32,10 +32,10 @@ module PortaText
         end
 
         def endpoint(_method)
-          return 'me/credit_cards' if @args[:id].nil?
+          return 'credit_cards' if @args[:id].nil?
           id = @args[:id]
           @args.delete :id
-          "me/credit_cards/#{id}"
+          "credit_cards/#{id}"
         end
       end
     end
