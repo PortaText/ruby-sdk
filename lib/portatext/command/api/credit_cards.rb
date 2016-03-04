@@ -1,7 +1,7 @@
 module PortaText
   module Command
     module Api
-      # The me/credit_cards/:id endpoint.
+      # The credit_cards/:id endpoint.
       # https://github.com/PortaText/docs/wiki/REST-API#api_credit_cards
       #
       # Author::    Marcelo Gornstein (mailto:marcelog@portatext.com)

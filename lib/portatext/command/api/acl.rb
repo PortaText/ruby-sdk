@@ -1,7 +1,7 @@
 module PortaText
   module Command
     module Api
-      # The me/acl endpoint.
+      # The acl endpoint.
       # https://github.com/PortaText/docs/wiki/REST-API#api_acl
       #
       # Author::    Marcelo Gornstein (mailto:marcelog@portatext.com)

@@ -1,12 +1,12 @@
 module PortaText
   module Test
     module Endpoints
-      # Tests the me/dids/:did endpoint.
+      # Tests the dids/:did endpoint.
       #
       # Author::    Marcelo Gornstein (mailto:marcelog@portatext.com)
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
-      class Settings < PortaText::Test::Helper::CommandTester
+      class CreditCards < PortaText::Test::Helper::CommandTester
         def test_can_delete_credit_card
           test_command 'credit_cards/44' do |client|
             client

@@ -1,7 +1,7 @@
 module PortaText
   module Command
     module Api
-      # The me/dids/:did endpoint.
+      # The dids/:did endpoint.
       # https://github.com/PortaText/docs/wiki/REST-API#api_did_settings
       #
       # Author::    Marcelo Gornstein (mailto:marcelog@portatext.com)
@@ -33,7 +33,7 @@ module PortaText
           raise 'DID number cant be null' if @args[:id].nil?
           id = @args[:id]
           @args.delete :id
-          "me/dids/#{id}"
+          "dids/#{id}"
         end
       end
     end

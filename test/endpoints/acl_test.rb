@@ -1,7 +1,7 @@
 module PortaText
   module Test
     module Endpoints
-      # Tests the me/acl endpoint.
+      # Tests the acl endpoint.
       #
       # Author::    Marcelo Gornstein (mailto:marcelog@portatext.com)
       # Copyright:: Copyright (c) 2015 PortaText
