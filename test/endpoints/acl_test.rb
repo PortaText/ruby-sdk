@@ -8,7 +8,7 @@ module PortaText
       # License::   Apache-2.0
       class Acl < PortaText::Test::Helper::CommandTester
         def test_can_get_acl
-          test_command 'me/acl' do |client|
+          test_command 'acl' do |client|
             client
               .acl
               .get
@@ -16,7 +16,7 @@ module PortaText
         end
 
         def test_put_acl
-          test_command 'me/acl', {
+          test_command 'acl', {
             'acl' => [
               {
                 'ip' => '192.168.0.1',

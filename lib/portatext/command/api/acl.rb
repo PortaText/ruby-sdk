@@ -19,7 +19,7 @@ module PortaText
         end
 
         def endpoint(_method)
-          'me/acl'
+          'acl'
         end
       end
     end
