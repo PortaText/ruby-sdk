@@ -7,14 +7,20 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class DidSettings < PortaText::Test::Helper::CommandTester
-        def test_cannot_request_settings_on_null_did
-          assert_raises RuntimeError do
-            test_command do |client|
-              client
-                .did_settings
-                .enable_cnam
-                .patch
-            end
+        def test_can_get_all_dids
+          test_command 'dids' do |client|
+            client
+              .did_settings
+              .get
+          end
+        end
+
+        def test_can_get_one_did
+          test_command 'dids/12223334444' do |client|
+            client
+              .did_settings
+              .for_number('12223334444')
+              .get
           end
         end
 
