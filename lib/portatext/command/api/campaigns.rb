@@ -32,6 +32,14 @@ module PortaText
           set :file, file
         end
 
+        def use_template(template_id, variables)
+          set :settings, template_id: template_id, variables: variables
+        end
+
+        def text(text)
+          set :settings, text: text
+        end
+
         # rubocop:disable Metrics/MethodLength
         def endpoint(_method)
           unless @args[:file].nil?
