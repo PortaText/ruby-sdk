@@ -75,6 +75,28 @@ module PortaText
           end
         end
 
+        def test_can_create_campaign_from_sms_service
+          test_command 'campaigns', {
+            :name => 'this is the name',
+            :description => 'and this is the description',
+            :service_id => 55,
+            :all_subscribers => true,
+            :settings => {
+              :template_id => 987,
+              :variables => { 'key1' => 'value1' }
+            }
+          } do |client|
+            client
+              .campaigns
+              .name('this is the name')
+              .description('and this is the description')
+              .from_service(55)
+              .all_subscribers
+              .use_template(987, { 'key1' => 'value1' })
+              .post
+          end
+        end
+
         def test_can_delete_a_campaign
           test_command 'campaigns/451' do |client|
             client

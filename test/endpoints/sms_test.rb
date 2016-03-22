@@ -60,6 +60,23 @@ module PortaText
           end
         end
 
+        def test_can_send_from_sms_service
+          test_command 'sms', {
+            :service_id => 55,
+            :to => '15556667777',
+            :text => 'hello world',
+            :client_ref => 'custom_client_ref'
+          } do |client|
+            client
+              .sms
+              .from_service(55)
+              .to('15556667777')
+              .text('hello world')
+              .client_ref('custom_client_ref')
+              .post
+          end
+        end
+
         def test_can_get_sms_operation
           test_command 'sms/763' do |client|
             client

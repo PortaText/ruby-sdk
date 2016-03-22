@@ -40,6 +40,14 @@ module PortaText
           set :settings, text: text
         end
 
+        def from_service(service_id)
+          set :service_id, service_id
+        end
+
+        def all_subscribers
+          set :all_subscribers, true
+        end
+
         # rubocop:disable Metrics/MethodLength
         def endpoint(_method)
           unless @args[:file].nil?

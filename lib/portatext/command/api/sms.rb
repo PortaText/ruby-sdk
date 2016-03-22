@@ -20,6 +20,10 @@ module PortaText
           set :from, from
         end
 
+        def from_service(service_id)
+          set :service_id, service_id
+        end
+
         def use_template(id, variables = {})
           set :template_id, id
           set :variables, variables
