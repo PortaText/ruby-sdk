@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'portatext'
-  s.version     = '1.3.2'
+  s.version     = '1.4.0'
   s.summary     = 'Official PortaText API ruby client'
   s.description = 'This is the official PortaText API ruby client'
   s.authors     = ['PortaText']
