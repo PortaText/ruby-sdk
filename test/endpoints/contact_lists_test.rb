@@ -29,6 +29,24 @@ module PortaText
           end
         end
 
+        def test_can_add_number_to_contact_list_with_variables
+          test_command(
+            'contact_lists/33/contacts/12223334444', {
+            :variables => [
+              {:key => 'first_name', :value => 'John'},
+              {:key => 'last_name', :value => 'Doe'}
+            ]
+          }) do |client|
+            client
+              .contact_lists
+              .id(33)
+              .with_number('12223334444', {
+                :first_name => 'John',
+                :last_name => 'Doe'
+              }).put
+          end
+        end
+
         def test_can_delete_number_from_contact_list
           test_command(
             'contact_lists/33/contacts/12223334444'

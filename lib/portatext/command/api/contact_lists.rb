@@ -28,7 +28,13 @@ module PortaText
           set :accept_file, file
         end
 
-        def with_number(number)
+        def with_number(number, variables = nil)
+          unless variables.nil?
+            variables = variables.reduce([]) do |acc, v|
+              acc << { key: v[0], value: v[1] }
+            end
+            set :variables, variables
+          end
           set :number, number
         end
 
