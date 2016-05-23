@@ -48,7 +48,20 @@ module PortaText
           set :all_subscribers, true
         end
 
+        def page(page)
+          set :page, page
+        end
+
+        def save_to(file)
+          set :accept_file, file
+        end
+
+        def contacts
+          set :contacts, true
+        end
+
         # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/AbcSize
         def endpoint(_method)
           unless @args[:file].nil?
             settings = @args.clone
@@ -59,10 +72,20 @@ module PortaText
           end
           return 'campaigns' if @args[:id].nil?
           id = @args[:id]
+          contacts = @args[:contacts]
           @args.delete :type
           @args.delete :id
+          @args.delete :contacts
+          qs = {}
+          unless @args[:page].nil?
+            qs['page'] = @args[:page]
+            @args.delete :page
+          end
+          qs = URI.encode_www_form qs
+          return "campaigns/#{id}/contacts?#{qs}" if contacts
           "campaigns/#{id}"
         end
+        # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
       end
     end
