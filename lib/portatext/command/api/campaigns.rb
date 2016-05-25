@@ -70,20 +70,23 @@ module PortaText
             settings = URI.encode_www_form('settings' => settings)
             return "campaigns?#{settings}"
           end
-          return 'campaigns' if @args[:id].nil?
-          id = @args[:id]
-          contacts = @args[:contacts]
-          @args.delete :type
-          @args.delete :id
-          @args.delete :contacts
           qs = {}
           unless @args[:page].nil?
             qs['page'] = @args[:page]
             @args.delete :page
           end
           qs = URI.encode_www_form qs
-          return "campaigns/#{id}/contacts?#{qs}" if contacts
-          "campaigns/#{id}"
+          unless @args[:id].nil?
+            id = @args[:id]
+            contacts = @args[:contacts]
+            @args.delete :type
+            @args.delete :id
+            @args.delete :contacts
+            return "campaigns/#{id}/contacts?#{qs}" if contacts
+            return "campaigns/#{id}"
+          end
+          return "campaigns?#{qs}" unless qs.empty?
+          'campaigns'
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength

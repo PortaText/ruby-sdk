@@ -7,6 +7,15 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Campaign < PortaText::Test::Helper::CommandTester
+        def test_can_get_paginated_campaigns_list
+          test_command('campaigns?page=44') do |client|
+            client
+              .campaigns
+              .page(44)
+              .get
+          end
+        end
+
         def test_can_export_all_contacts_to_csv
           test_command(
             'campaigns/123/contacts?', '', 'application/json', 'text/csv'
