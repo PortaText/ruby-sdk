@@ -41,7 +41,17 @@ module PortaText
           set :contact_list_ids, contact_lists
         end
 
+        def search(params)
+          set :search_params, params
+        end
+
         def endpoint(_method)
+          unless @args[:search_params].nil?
+            qs = URI.encode_www_form @args[:search_params]
+            @args.delete :search_params
+            return "sms?#{qs}"
+          end
+
           return 'sms' if @args[:id].nil?
           id = @args[:id]
           @args.delete :id

@@ -7,6 +7,20 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Sms < PortaText::Test::Helper::CommandTester
+        def test_can_search_for_sms_operations
+          test_command(
+            'sms?page=3&date_from=2015-01-01T00%3A00%3A00'
+          ) do |client|
+            client
+              .sms
+              .search({
+                page: 3,
+                date_from: '2015-01-01T00:00:00'
+              })
+              .get
+          end
+        end
+
         def test_can_send_to_contact_lists
           test_command 'sms', {
             :from => '12223334444',
