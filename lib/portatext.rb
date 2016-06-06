@@ -36,6 +36,7 @@ require_relative 'portatext/command/api/my_password'
 require_relative 'portatext/command/api/contacts'
 require_relative 'portatext/command/api/number_verify'
 require_relative 'portatext/command/api/services'
+require_relative 'portatext/command/api/trunks'
 
 # The PortaText namespace.
 #
