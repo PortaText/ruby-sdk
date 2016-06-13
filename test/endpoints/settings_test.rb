@@ -7,6 +7,33 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Settings < PortaText::Test::Helper::CommandTester
+        def test_can_set_amd_settings
+          test_command 'me/settings', {
+            'amd_initial_silence' => 900,
+            'amd_max_greeting_length' => 800,
+            'amd_after_greeting_silence' => 700,
+            'amd_total_time' => 600,
+            'amd_min_word_length' => 500,
+            'amd_between_words_silence' => 400,
+            'amd_max_words' => 300,
+            'amd_silence_threshold' => 200,
+            'amd_max_word_length' =>  100
+          } do |client|
+            client
+              .settings
+              .amd_initial_silence(900)
+              .amd_max_greeting_length(800)
+              .amd_after_greeting_silence(700)
+              .amd_total_time(600)
+              .amd_min_word_length(500)
+              .amd_between_words_silence(400)
+              .amd_max_words(300)
+              .amd_silence_threshold(200)
+              .amd_max_word_length(100)
+              .patch
+          end
+        end
+
         def test_can_get_settings
           test_command 'me/settings' do |client|
             client
