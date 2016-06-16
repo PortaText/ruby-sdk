@@ -40,8 +40,9 @@ module PortaText
           end
         end
 
-        def test_can_create_campaign_from_csv
+        def test_can_create_sms_campaign_from_csv
           settings = {
+            :type => 'sms',
             :name => 'this is the name',
             :description => 'and this is the description',
             :from => '12223334444',
@@ -55,7 +56,7 @@ module PortaText
             'text/csv'
           ) do |client|
             client
-              .campaigns
+              .sms_campaign
               .name('this is the name')
               .description('and this is the description')
               .csv('/tmp/contacts.csv')
@@ -65,8 +66,9 @@ module PortaText
           end
         end
 
-        def test_can_create_campaign_with_text
+        def test_can_create_sms_campaign_with_text
           test_command 'campaigns', {
+            :type => 'sms',
             :name => 'this is the name',
             :description => 'and this is the description',
             :contact_list_ids => [1, 3, 5, 7, 9],
@@ -76,7 +78,7 @@ module PortaText
             }
           } do |client|
             client
-              .campaigns
+              .sms_campaign
               .name('this is the name')
               .description('and this is the description')
               .to_contact_lists([1, 3, 5, 7, 9])
@@ -86,8 +88,9 @@ module PortaText
           end
         end
 
-        def test_can_create_campaign_with_template
+        def test_can_create_sms_campaign_with_template
           test_command 'campaigns', {
+            :type => 'sms',
             :name => 'this is the name',
             :description => 'and this is the description',
             :contact_list_ids => [1, 3, 5, 7, 9],
@@ -98,7 +101,7 @@ module PortaText
             }
           } do |client|
             client
-              .campaigns
+              .sms_campaign
               .name('this is the name')
               .description('and this is the description')
               .to_contact_lists([1, 3, 5, 7, 9])
@@ -108,8 +111,9 @@ module PortaText
           end
         end
 
-        def test_can_create_campaign_from_sms_service
+        def test_can_create_sms_campaign_from_sms_service
           test_command 'campaigns', {
+            :type => 'sms',
             :name => 'this is the name',
             :description => 'and this is the description',
             :service_id => 55,
@@ -120,7 +124,7 @@ module PortaText
             }
           } do |client|
             client
-              .campaigns
+              .sms_campaign
               .name('this is the name')
               .description('and this is the description')
               .from_service(55)
