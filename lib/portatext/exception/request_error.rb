@@ -5,7 +5,7 @@ module PortaText
     # Author::    Marcelo Gornstein (mailto:marcelog@portatext.com)
     # Copyright:: Copyright (c) 2015 PortaText
     # License::   Apache-2.0
-    class RequestError < ::Exception
+    class RequestError < ::RuntimeError
       attr_reader :descriptor
       attr_reader :original
       attr_reader :result
