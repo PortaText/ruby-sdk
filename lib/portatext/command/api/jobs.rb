@@ -16,6 +16,10 @@ module PortaText
           set :page, page
         end
 
+        def save_to(file)
+          set :accept_any_file, file
+        end
+
         def endpoint(_method)
           page = @args[:page]
           @args.delete :page
@@ -24,6 +28,7 @@ module PortaText
           return endpoint if @args[:id].nil?
           id = @args[:id]
           @args.delete :id
+          return "jobs/#{id}/result" unless @args[:accept_any_file].nil?
           "jobs/#{id}"
         end
       end
