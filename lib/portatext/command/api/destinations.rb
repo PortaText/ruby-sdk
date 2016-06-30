@@ -17,6 +17,10 @@ module PortaText
           set :order, order
         end
 
+        def save_to(file)
+          set :accept_file, file
+        end
+
         # rubocop:disable Metrics/MethodLength
         # rubocop:disable Metrics/AbcSize
         def endpoint(_method)

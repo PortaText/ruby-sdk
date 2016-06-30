@@ -23,6 +23,16 @@ module PortaText
               .get
           end
         end
+        def test_can_save_list_to_csv
+          test_command(
+            'operators', '', 'application/json', 'text/csv'
+          ) do |client|
+            client
+              .operators
+              .save_to('/tmp/operators.csv')
+              .get
+          end
+        end
       end
     end
   end
