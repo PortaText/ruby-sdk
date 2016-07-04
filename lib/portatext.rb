@@ -43,6 +43,7 @@ require_relative 'portatext/command/api/inspect'
 require_relative 'portatext/command/api/operators'
 require_relative 'portatext/command/api/destinations'
 require_relative 'portatext/command/api/simulate'
+require_relative 'portatext/command/api/summary'
 
 # The PortaText namespace.
 #
