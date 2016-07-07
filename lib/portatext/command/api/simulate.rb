@@ -21,9 +21,28 @@ module PortaText
           set :text, text
         end
 
+        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/AbcSize
         def endpoint(_method)
-          'simulate'
+          raise 'Country cant be null' if @args[:country].nil?
+          qs = { 'country' => @args.delete(:country) }
+          @args.delete :country
+          unless @args[:text].nil?
+            qs['text'] = @args[:text]
+            @args.delete :text
+          end
+          unless @args[:template_id].nil?
+            qs['template_id'] = @args[:template_id]
+            @args.delete :template_id
+          end
+          unless @args[:variables].nil?
+            qs['variables'] = @args[:variables].to_json
+            @args.delete :variables
+          end
+          "simulate?#{URI.encode_www_form qs}"
         end
+        # rubocop:enable Metrics/AbcSize
+        # rubocop:enable Metrics/MethodLength
       end
     end
   end
