@@ -37,12 +37,14 @@ module PortaText
 
       def content_type(_method)
         return 'text/csv' unless @args[:file].nil?
+        return 'audio/mpeg' unless @args[:sound_file].nil?
         'application/json'
       end
 
       def accept_content_type(_method)
         return '*/*' unless @args[:accept_any_file].nil?
         return 'text/csv' unless @args[:accept_file].nil?
+        return 'audio/mpeg' unless @args[:accept_sound_file].nil?
         'application/json'
       end
 
@@ -58,18 +60,22 @@ module PortaText
 
       private
 
+      # rubocop:disable Metrics/MethodLength
       def run(method)
         a_type = accept_content_type method
         command_endpoint = endpoint(method)
         file = @args[:accept_file]
         file ||= @args[:accept_any_file]
+        file ||= @args[:accept_sound_file]
         @args.delete :accept_file
         @args.delete :accept_any_file
+        @args.delete :accept_sound_file
         @client.run(
           command_endpoint, method, content_type(method),
           a_type, body(method), file
         )
       end
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
