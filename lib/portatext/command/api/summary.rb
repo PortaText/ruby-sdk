@@ -20,7 +20,20 @@ module PortaText
           set :accept_file, file
         end
 
+        def by_day
+          set :granularity, 'date'
+        end
+
+        def by_month
+          set :granularity, 'month'
+        end
+
+        def by_week
+          set :granularity, 'week'
+        end
+
         # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/AbcSize
         def endpoint(_method)
           qs = {}
           unless @args[:date_from].nil?
@@ -31,6 +44,10 @@ module PortaText
             qs[:date_to] = @args[:date_to]
             @args.delete :date_to
           end
+          unless @args[:granularity].nil?
+            qs[:granularity] = @args[:granularity]
+            @args.delete :granularity
+          end
           unless qs.empty?
             qs = URI.encode_www_form qs
             return "summary?#{qs}"
@@ -38,6 +55,7 @@ module PortaText
 
           'summary'
         end
+        # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
       end
     end

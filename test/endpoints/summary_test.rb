@@ -15,6 +15,33 @@ module PortaText
           end
         end
 
+        def test_can_get_summary_by_date_granularity
+          test_command 'summary?granularity=date' do |client|
+            client
+              .summary
+              .by_day
+              .get
+          end
+        end
+
+        def test_can_get_summary_by_month_granularity
+          test_command 'summary?granularity=month' do |client|
+            client
+              .summary
+              .by_month
+              .get
+          end
+        end
+
+        def test_can_get_summary_by_week_granularity
+          test_command 'summary?granularity=week' do |client|
+            client
+              .summary
+              .by_week
+              .get
+          end
+        end
+
         def test_can_get_summary_by_date_range
           test_command(
             'summary?date_from=2015-01-01T00%3A00%3A00&date_to=2015-05-01T00%3A00%3A00'
