@@ -48,6 +48,12 @@ module PortaText
           set :contacts, true
         end
 
+        def schedule(type, details)
+          schedule = {}
+          schedule[type] = details
+          set :schedule, schedule
+        end
+
         # rubocop:disable Metrics/MethodLength
         # rubocop:disable Metrics/AbcSize
         def endpoint(_method)
