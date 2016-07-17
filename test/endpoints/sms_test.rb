@@ -57,6 +57,28 @@ module PortaText
           end
         end
 
+        def test_can_schedule_message
+          test_command 'sms', {
+            :from => '12223334444',
+            :to => '15556667777',
+            :text => 'hello world',
+            :schedule => {
+              :any_day => {
+                :from => '15:00',
+                :to => '17:30'
+              }
+            }
+          } do |client|
+            client
+              .sms
+              .from('12223334444')
+              .to('15556667777')
+              .text('hello world')
+              .schedule('any_day', {:from => '15:00', :to => '17:30'})
+              .post
+          end
+        end
+
         def test_can_send_message_with_text
           test_command 'sms', {
             :from => '12223334444',

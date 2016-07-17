@@ -45,6 +45,12 @@ module PortaText
           set :search_params, params
         end
 
+        def schedule(type, details)
+          schedule = {}
+          schedule[type] = details
+          set :schedule, schedule
+        end
+
         def endpoint(_method)
           unless @args[:search_params].nil?
             qs = URI.encode_www_form @args[:search_params]
