@@ -89,12 +89,12 @@ module PortaText
         def test_can_enable_autorecharges
           test_command 'me/settings', {
             'autorecharge_enabled' => true,
-            'autorecharge_total' => 150,
+            'autorecharge_total' => 5000,
             'autorecharge_when_credit' => 100
           } do |client|
             client
               .settings
-              .enable_autorecharges(100, 150)
+              .enable_autorecharges(100, 5000)
               .patch
           end
         end

@@ -10,12 +10,12 @@ module PortaText
         def test_can_recharge
           test_command 'recharge', {
             :card_id => 445522,
-            :total => 150
+            :total => 5000
           } do |client|
             client
               .recharge
               .with_card(445522)
-              .total(150)
+              .total(5000)
               .post
           end
         end
