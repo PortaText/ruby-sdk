@@ -16,15 +16,24 @@ module PortaText
       attr_writer :executor
       attr_writer :logger
 
+      def respond_to_missing?(method, *_arguments, &_block)
+        defined?(command_class_name method) || super
+      end
+
       def method_missing(method, *_arguments, &_block)
-        method = method.to_s.split('_').map(&:capitalize)
-        class_name = Object.const_get('PortaText')
-                           .const_get('Command')
-                           .const_get('Api')
-                           .const_get(method.join(''))
+        class_name = command_class_name(method)
+        super unless defined?(class_name)
         command = class_name.new
         command.client = self
         command
+      end
+
+      def command_class_name(method)
+        method = method.to_s.split('_').map(&:capitalize)
+        Object.const_get('PortaText')
+              .const_get('Command')
+              .const_get('Api')
+              .const_get(method.join(''))
       end
 
       # rubocop:disable Metrics/MethodLength
