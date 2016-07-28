@@ -13,11 +13,12 @@ module PortaText
         end
 
         def use_template(template_id, variables)
-          set :settings, template_id: template_id, variables: variables
+          set_setting :template_id, template_id
+          set_setting :variables, variables
         end
 
         def text(text)
-          set :settings, text: text
+          set_setting :text, text
         end
 
         def initialize

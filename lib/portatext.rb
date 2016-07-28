@@ -46,6 +46,7 @@ require_relative 'portatext/command/api/simulate'
 require_relative 'portatext/command/api/summary'
 require_relative 'portatext/command/api/gsm_charset'
 require_relative 'portatext/command/api/sounds'
+require_relative 'portatext/command/api/tel_campaign'
 
 # The PortaText namespace.
 #

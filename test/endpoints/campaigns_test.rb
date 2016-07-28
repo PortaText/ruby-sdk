@@ -7,6 +7,34 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Campaign < PortaText::Test::Helper::CommandTester
+        def test_can_create_telephony_campaign
+          test_command 'campaigns', {
+            :type => 'telephony',
+            :name => 'this is the name',
+            :description => 'and this is the description',
+            :contact_list_ids => [1, 3, 5, 7, 9],
+            :from => '12223334444',
+            :settings => {
+              :iterations => 3,
+              :agents => 20,
+              :post_call_work_duration => 15,
+              :min_iteration_time => 5
+            }
+          } do |client|
+            client
+              .tel_campaign
+              .name('this is the name')
+              .description('and this is the description')
+              .to_contact_lists([1, 3, 5, 7, 9])
+              .from('12223334444')
+              .iterations(3)
+              .agents(20)
+              .post_call_work_duration(15)
+              .min_iteration_time(5)
+              .post
+          end
+        end
+
         def test_can_get_paginated_campaigns_list
           test_command('campaigns?page=44') do |client|
             client

@@ -54,6 +54,13 @@ module PortaText
           set :schedule, schedule
         end
 
+        def set_setting(name, value)
+          args = @args[:settings]
+          args ||= {}
+          args[name] = value
+          set :settings, args
+        end
+
         # rubocop:disable Metrics/MethodLength
         # rubocop:disable Metrics/AbcSize
         def endpoint(_method)
