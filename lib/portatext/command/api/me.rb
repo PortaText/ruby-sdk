@@ -29,6 +29,10 @@ module PortaText
           set :timezone, timezone
         end
 
+        def language(language)
+          set :language, language
+        end
+
         def endpoint(_method)
           'me'
         end

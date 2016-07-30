@@ -22,7 +22,8 @@ module PortaText
             'email' => 'john@doe.com',
             'company' => 'Mr. spiffy',
             'callback_url' => nil,
-            'timezone' => 'UTC'
+            'timezone' => 'UTC',
+            'language' => 'es'
           } do |client|
             client
               .me
@@ -31,6 +32,7 @@ module PortaText
               .company('Mr. spiffy')
               .callback_url(nil)
               .timezone('UTC')
+              .language('es')
               .put
           end
         end
