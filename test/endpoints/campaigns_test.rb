@@ -18,7 +18,8 @@ module PortaText
               :iterations => 3,
               :agents => 20,
               :post_call_work_duration => 15,
-              :min_iteration_time => 5
+              :min_iteration_time => 5,
+              :outbound_trunk_id => 33
             }
           } do |client|
             client
@@ -31,6 +32,7 @@ module PortaText
               .agents(20)
               .post_call_work_duration(15)
               .min_iteration_time(5)
+              .outbound_trunk_id(33)
               .post
           end
         end

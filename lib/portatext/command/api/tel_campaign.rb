@@ -24,6 +24,10 @@ module PortaText
           set_setting :min_iteration_time, minutes
         end
 
+        def outbound_trunk_id(trunk_id)
+          set_setting :outbound_trunk_id, trunk_id
+        end
+
         def initialize
           super
           set :type, 'telephony'
