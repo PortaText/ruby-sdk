@@ -48,6 +48,10 @@ module PortaText
           set :contacts, true
         end
 
+        def contact(contact)
+          set :contact, contact
+        end
+
         def schedule(type, details)
           schedule = {}
           schedule[type] = details
@@ -63,6 +67,7 @@ module PortaText
 
         # rubocop:disable Metrics/MethodLength
         # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/CyclomaticComplexity
         def endpoint(_method)
           unless @args[:file].nil?
             settings = @args.clone
@@ -80,15 +85,19 @@ module PortaText
           unless @args[:id].nil?
             id = @args[:id]
             contacts = @args[:contacts]
+            contact = @args[:contact]
             @args.delete :type
             @args.delete :id
             @args.delete :contacts
+            @args.delete :contact
+            return "campaigns/#{id}/contacts/#{contact}" if contact
             return "campaigns/#{id}/contacts?#{qs}" if contacts
             return "campaigns/#{id}"
           end
           return "campaigns?#{qs}" unless qs.empty?
           'campaigns'
         end
+        # rubocop:enable Metrics/CyclomaticComplexity
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
       end

@@ -7,6 +7,16 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Campaign < PortaText::Test::Helper::CommandTester
+        def test_can_cancel_contact
+          test_command('campaigns/44/contacts/12223334444') do |client|
+            client
+              .campaigns
+              .id(44)
+              .contact('12223334444')
+              .delete
+          end
+        end
+
         def test_can_create_telephony_campaign
           test_command 'campaigns', {
             :type => 'telephony',
