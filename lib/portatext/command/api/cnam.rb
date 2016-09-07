@@ -12,11 +12,17 @@ module PortaText
           set :number, number
         end
 
+        def csv(file)
+          set :file, file
+        end
+
         def endpoint(_method)
-          raise 'DID number cant be null' if @args[:number].nil?
+          error = @args[:number].nil? && @args[:file].nil?
+          raise 'DID number cant be null' if error
           number = @args[:number]
           @args.delete :number
-          "cnam/#{number}"
+          return "cnam/#{number}" unless number.nil?
+          'cnam'
         end
       end
     end

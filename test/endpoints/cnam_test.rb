@@ -25,6 +25,15 @@ module PortaText
               .post
           end
         end
+
+        def test_can_query_with_csv
+          test_command('cnam', 'file:/tmp/a.csv', 'text/csv') do |client|
+            client
+              .cnam
+              .csv('/tmp/a.csv')
+              .post
+          end
+        end
       end
     end
   end
