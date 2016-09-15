@@ -8,6 +8,17 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Settings < Base
+        def publish_events_to_sns(key, secret, topic)
+          set :sns_publish_enabled, true
+          set :sns_access_key, key
+          set :sns_access_secret, secret
+          set :sns_topic, topic
+        end
+
+        def dont_publish_events_to_sns
+          set :sns_publish_enabled, false
+        end
+
         def dont_alert_on_low_credit
           set :alert_when_credit_less_than, nil
         end

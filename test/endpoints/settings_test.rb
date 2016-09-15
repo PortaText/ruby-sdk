@@ -7,6 +7,31 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Settings < PortaText::Test::Helper::CommandTester
+        def test_can_enable_sns_publishing
+          test_command 'me/settings', {
+            'sns_publish_enabled' => true,
+            'sns_access_key' => 'key',
+            'sns_access_secret' => 'secret',
+            'sns_topic' => 'topic'
+          } do |client|
+            client
+              .settings
+              .publish_events_to_sns('key', 'secret', 'topic')
+              .patch
+          end
+        end
+
+        def test_can_disable_sns_publishing
+          test_command 'me/settings', {
+            'sns_publish_enabled' => false
+          } do |client|
+            client
+              .settings
+              .dont_publish_events_to_sns
+              .patch
+          end
+        end
+
         def test_can_set_amd_settings
           test_command 'me/settings', {
             'amd_initial_silence' => 900,
