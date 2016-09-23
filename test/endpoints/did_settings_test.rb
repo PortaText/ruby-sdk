@@ -7,6 +7,30 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class DidSettings < PortaText::Test::Helper::CommandTester
+        def test_can_enable_stop_words
+          test_command 'dids/12223334444', {
+            :stop_words_enabled => true
+          } do |client|
+            client
+              .did_settings
+              .for_number('12223334444')
+              .enable_stop_words
+              .patch
+          end
+        end
+
+        def test_can_disable_stop_words
+          test_command 'dids/12223334444', {
+            :stop_words_enabled => false
+          } do |client|
+            client
+              .did_settings
+              .for_number('12223334444')
+              .disable_stop_words
+              .patch
+          end
+        end
+
         def test_can_get_all_dids
           test_command 'dids' do |client|
             client

@@ -12,6 +12,14 @@ module PortaText
           set :id, number
         end
 
+        def disable_stop_words
+          set :stop_words_enabled, false
+        end
+
+        def enable_stop_words
+          set :stop_words_enabled, true
+        end
+
         def disable_cnam
           set :cnam_enabled, false
         end
