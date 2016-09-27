@@ -135,6 +135,28 @@ module PortaText
           end
         end
 
+        def test_can_use_multiple_dids_as_source
+          test_command 'campaigns', {
+            :type => 'sms',
+            :name => 'this is the name',
+            :description => 'and this is the description',
+            :contact_list_ids => [1, 3, 5, 7, 9],
+            :from => ['12223334444', '12223334445'],
+            :settings => {
+              :text => 'Hello world'
+            }
+          } do |client|
+            client
+              .sms_campaign
+              .name('this is the name')
+              .description('and this is the description')
+              .to_contact_lists([1, 3, 5, 7, 9])
+              .from(['12223334444', '12223334445'])
+              .text('Hello world')
+              .post
+          end
+        end
+
         def test_can_create_sms_campaign_with_text
           test_command 'campaigns', {
             :type => 'sms',
