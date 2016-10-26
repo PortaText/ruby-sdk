@@ -79,6 +79,36 @@ module PortaText
           end
         end
 
+        def test_can_send_message_with_any_as_from
+          test_command 'sms', {
+            :from => 'any',
+            :to => '15556667777',
+            :text => 'hello world'
+          } do |client|
+            client
+              .sms
+              .from('any')
+              .to('15556667777')
+              .text('hello world')
+              .post
+          end
+        end
+
+        def test_can_send_message_with_list_as_from
+          test_command 'sms', {
+            :from => ['12223334444', '12223334445', '12223334446'],
+            :to => '15556667777',
+            :text => 'hello world'
+          } do |client|
+            client
+              .sms
+              .from(['12223334444', '12223334445', '12223334446'])
+              .to('15556667777')
+              .text('hello world')
+              .post
+          end
+        end
+
         def test_can_send_message_with_text
           test_command 'sms', {
             :from => '12223334444',
