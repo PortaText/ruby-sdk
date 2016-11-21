@@ -28,6 +28,14 @@ module PortaText
           set_setting :outbound_trunk_id, trunk_id
         end
 
+        def dial_timeout(timeout)
+          set_setting :dial_timeout, timeout
+        end
+
+        def flow(call_flow)
+          set_setting :flow, call_flow
+        end
+
         def initialize
           super
           set :type, 'telephony'

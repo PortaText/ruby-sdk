@@ -29,7 +29,16 @@ module PortaText
               :agents => 20,
               :post_call_work_duration => 15,
               :min_iteration_time => 5,
-              :outbound_trunk_id => 33
+              :outbound_trunk_id => 33,
+              :dial_timeout => 120,
+              :flow => [
+                {:wait => {
+                  :seconds => 120
+                }},
+                {:play => {
+                  :sound_id => 3
+                }}
+              ]
             }
           } do |client|
             client
@@ -43,7 +52,15 @@ module PortaText
               .post_call_work_duration(15)
               .min_iteration_time(5)
               .outbound_trunk_id(33)
-              .post
+              .dial_timeout(120)
+              .flow([
+                {:wait => {
+                  :seconds => 120
+                }},
+                {:play => {
+                  :sound_id => 3
+                }}
+              ]).post
           end
         end
 
