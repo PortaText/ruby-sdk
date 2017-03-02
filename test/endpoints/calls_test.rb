@@ -7,6 +7,20 @@ module PortaText
       # Copyright:: Copyright (c) 2015 PortaText
       # License::   Apache-2.0
       class Calls < PortaText::Test::Helper::CommandTester
+        def test_can_search_for_calls_operations
+          test_command(
+            'calls?page=1&date_from=2017-03-01T16%3A00%3A00'
+          ) do |client|
+            client
+              .calls
+              .search({
+                page: 1,
+                date_from: '2017-03-01T16:00:00'
+              })
+              .get
+          end
+        end
+
         def test_can_isse_call
           test_command 'calls', {
             :from => '12223334444',

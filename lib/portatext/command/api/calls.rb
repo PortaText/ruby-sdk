@@ -28,7 +28,17 @@ module PortaText
           set :flow, call_flow
         end
 
+        def search(params)
+          set :search_params, params
+        end
+
         def endpoint(_method)
+          unless @args[:search_params].nil?
+            qs = URI.encode_www_form @args[:search_params]
+            @args.delete :search_params
+            return "calls?#{qs}"
+          end
+
           'calls'
         end
       end
