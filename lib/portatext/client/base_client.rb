@@ -138,7 +138,7 @@ module PortaText
         end
         headers
       end
-      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/ClassLength
     end
   end
 end
