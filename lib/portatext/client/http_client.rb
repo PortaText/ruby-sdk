@@ -16,7 +16,7 @@ module PortaText
         request = create_request uri, descriptor.method, descriptor.body
         begin
           request! descriptor, http, request
-        rescue => e
+        rescue StandardError => e
           raise ::PortaText::Exception::RequestError.new(
             descriptor, nil, e.message, e
           )

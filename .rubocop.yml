@@ -4,4 +4,7 @@ AllCops:
     - 'src/**/*'
   Exclude:
     - 'test/**/*'
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/*.gemspec'
 
