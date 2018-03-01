@@ -38,7 +38,7 @@ module PortaText
         request = Object.const_get('Net')
                         .const_get('HTTP')
                         .const_get(method)
-                        .new uri
+                        .new uri.to_s
         data = /^file:(.*)$/.match(body)
         if data.nil?
           request.body = body
