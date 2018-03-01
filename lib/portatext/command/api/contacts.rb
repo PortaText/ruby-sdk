@@ -37,14 +37,14 @@ module PortaText
           set :accept_file, file
         end
 
-        # rubocop:disable Style/AccessorMethodName
+        # rubocop:disable Naming/AccessorMethodName
         def set_all(variables)
           variables = variables.reduce([]) do |acc, v|
             acc << { key: v[0], value: v[1] }
           end
           set :variables, variables
         end
-        # rubocop:enable Style/AccessorMethodName
+        # rubocop:enable Naming/AccessorMethodName
 
         # rubocop:disable Metrics/MethodLength
         # rubocop:disable Metrics/AbcSize
