@@ -117,7 +117,9 @@ module PortaText
         }
         errors[code]
       end
+      # rubocop:enable Metrics/MethodLength
 
+      # rubocop:disable Metrics/MethodLength
       def form_headers(content_type, accept_content_type, auth)
         headers = {
           'Content-Type' => content_type,
@@ -136,6 +138,7 @@ module PortaText
         end
         headers
       end
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
